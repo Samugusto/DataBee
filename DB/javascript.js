@@ -1,20 +1,18 @@
 // === LOADING REAL - ESPERA TUDO CARREGAR ===
 document.addEventListener('DOMContentLoaded', function() {
-    // BLOQUEIA IMEDIATAMENTE TUDO
     document.body.classList.add('loading-locked');
     document.getElementById('header').classList.add('loading-hidden');
-    
-    // PREVINE EVENTOS
+
+    // Constrói o loader hexagonal assim que o DOM está pronto
+    buildHexLoader();
+
     const scrollEvents = ['wheel', 'touchmove', 'keydown'];
     scrollEvents.forEach(event => {
         document.addEventListener(event, preventScroll, { passive: false });
     });
-    
-    // DESATIVA OBSERVERS DURANTE LOADING
+
     window.loadingObservers = window.loadingObservers || [];
-    
-    // ✅ ESPERA TUDO CARREGAR DE VERDADE
-    // Garante que, mesmo se alguma promise falhar, o loader será removido
+
     waitForAllResources()
         .then(hideLoader)
         .catch((err) => {
@@ -23,18 +21,69 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 });
 
+// === LOADER HEXAGONAL ===
+function buildHexLoader() {
+    const svgEl = document.getElementById('hexLoaderSvg');
+    if (!svgEl) return;
+
+    const size = 100, strokeW = 6;
+    const ns = 'http://www.w3.org/2000/svg';
+
+    function hexPoints(cx, cy, r) {
+        const pts = [];
+        for (let i = 0; i < 6; i++) {
+            const angle = (Math.PI / 180) * (60 * i - 90);
+            pts.push([cx + r * Math.cos(angle), cy + r * Math.sin(angle)]);
+        }
+        return pts;
+    }
+
+    const pts = hexPoints(size / 2, size / 2, size / 2 - strokeW);
+    const pStr = pts.map(p => p[0].toFixed(3) + ',' + p[1].toFixed(3)).join(' ');
+    const perim = pts.reduce((acc, p, i) => {
+        const b = pts[(i + 1) % pts.length];
+        return acc + Math.hypot(b[0] - p[0], b[1] - p[1]);
+    }, 0);
+
+    // Trilha de fundo
+    const track = document.createElementNS(ns, 'polygon');
+    track.setAttribute('points', pStr);
+    track.setAttribute('fill', 'none');
+    track.setAttribute('stroke', 'rgba(255,255,255,0.15)');
+    track.setAttribute('stroke-width', strokeW);
+    track.setAttribute('stroke-linejoin', 'round');
+    svgEl.appendChild(track);
+
+    // Arco animado
+    const prog = document.createElementNS(ns, 'polygon');
+    prog.setAttribute('points', pStr);
+    prog.setAttribute('fill', 'none');
+    prog.setAttribute('stroke', '#ffffff');
+    prog.setAttribute('stroke-width', strokeW);
+    prog.setAttribute('stroke-linecap', 'round');
+    prog.setAttribute('stroke-linejoin', 'round');
+    prog.setAttribute('stroke-dasharray', perim);
+    prog.setAttribute('stroke-dashoffset', perim);
+
+    const anim = document.createElementNS(ns, 'animate');
+    anim.setAttribute('attributeName', 'stroke-dashoffset');
+    anim.setAttribute('values', `${perim};${perim * 0.05};${-perim * 0.95}`);
+    anim.setAttribute('keyTimes', '0;0.5;1');
+    anim.setAttribute('dur', '1.4s');
+    anim.setAttribute('repeatCount', 'indefinite');
+    anim.setAttribute('calcMode', 'spline');
+    anim.setAttribute('keySplines', '0.4 0 0.2 1;0.4 0 0.2 1');
+    prog.appendChild(anim);
+
+    svgEl.appendChild(prog);
+}
+
+// === AGUARDA RECURSOS ===
 function waitForAllResources() {
     return Promise.all([
-        // 1. Espera imagens carregarem
         waitForImages(),
-        
-        // 2. Espera fontes carregarem
         waitForFonts(),
-        
-        // 3. Espera window.load (todos recursos)
         waitForWindowLoad(),
-        
-        // 4. Espera CSS customizado carregar (se usar)
         waitForCustomCSS()
     ]);
 }
@@ -43,10 +92,10 @@ function waitForImages() {
     return new Promise((resolve) => {
         const images = document.querySelectorAll('img');
         if (images.length === 0) return resolve();
-        
+
         let loadedCount = 0;
-        
-        images.forEach((img, index) => {
+
+        images.forEach((img) => {
             if (img.complete && img.naturalHeight !== 0) {
                 loadedCount++;
             } else {
@@ -56,15 +105,14 @@ function waitForImages() {
                 };
             }
         });
-        
-        // Se todas já carregaram
+
         if (loadedCount === images.length) resolve();
     });
 }
 
 function waitForFonts() {
-    return document.fonts ? 
-        document.fonts.ready : 
+    return document.fonts ?
+        document.fonts.ready :
         Promise.resolve();
 }
 
@@ -79,11 +127,10 @@ function waitForWindowLoad() {
 }
 
 function waitForCustomCSS() {
-    // Para CSS carregado via JS ou link externo
     return new Promise((resolve) => {
         const links = document.querySelectorAll('link[rel="stylesheet"]');
         let loadedCount = 0;
-        
+
         if (links.length === 0) return resolve();
 
         const handleLoad = () => {
@@ -92,7 +139,6 @@ function waitForCustomCSS() {
         };
 
         links.forEach(link => {
-            // Acessar link.sheet pode lançar em casos CORS; trate como carregado
             try {
                 if (link.sheet) {
                     loadedCount++;
@@ -118,30 +164,27 @@ function preventScroll(e) {
     return false;
 }
 
+// === ESCONDE O LOADER ===
 function hideLoader() {
     const loader = document.getElementById('loader');
-    
-    // DESBLOQUEIA
+
     document.body.classList.remove('loading-locked');
     document.getElementById('header').classList.remove('loading-hidden');
-    
-    // Remove bloqueios
+
     ['wheel', 'touchmove', 'keydown'].forEach(event => {
         document.removeEventListener(event, preventScroll);
     });
-    
-    // Fade out loader
+
     loader.classList.add('hidden');
-    
+
     setTimeout(() => {
         loader.style.display = 'none';
         loader.remove();
-        
-
         reactivateAnimations();
     }, 800);
 }
 
+// === REATIVA ANIMAÇÕES ===
 function reactivateAnimations() {
     initHeaderObserver();
     initMotivadorObserver();
@@ -151,18 +194,14 @@ function reactivateAnimations() {
 function initHeaderObserver() {
     const header = document.getElementById("header");
     const fundo = document.querySelector(".fundo1");
-    
+
     if (fundo && header) {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    header.style.top = "-90px";
-                } else {
-                    header.style.top = "0px";
-                }
+                header.style.top = entry.isIntersecting ? "-90px" : "0px";
             });
         }, { threshold: 0.1 });
-        
+
         observer.observe(fundo);
     }
 }
@@ -179,13 +218,12 @@ function initMotivadorObserver() {
             }
         });
     }, { threshold: 0.1 });
-    
+
     document.querySelectorAll(".motivador, .motivador2").forEach(el => {
         motivadorObserver.observe(el);
     });
-    
-    const elementos = document.querySelectorAll(".botao-animado");
-    elementos.forEach((el, index) => {
+
+    document.querySelectorAll(".botao-animado").forEach((el, index) => {
         el.style.transitionDelay = `${index * 0.2}s`;
         motivadorObserver.observe(el);
     });
