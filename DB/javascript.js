@@ -1,10 +1,10 @@
 // === LOADING REAL - ESPERA TUDO CARREGAR ===
 document.addEventListener('DOMContentLoaded', function() {
     document.body.classList.add('loading-locked');
-    document.getElementById('header').classList.add('loading-hidden');
-
-    // Constrói o loader hexagonal assim que o DOM está pronto
-    buildHexLoader();
+    
+    // Verificação de segurança caso o header ainda não exista no DOM
+    const header = document.getElementById('header');
+    if (header) header.classList.add('loading-hidden');
 
     const scrollEvents = ['wheel', 'touchmove', 'keydown'];
     scrollEvents.forEach(event => {
@@ -20,63 +20,6 @@ document.addEventListener('DOMContentLoaded', function() {
             hideLoader();
         });
 });
-
-// === LOADER HEXAGONAL ===
-function buildHexLoader() {
-    const svgEl = document.getElementById('hexLoaderSvg');
-    if (!svgEl) return;
-
-    const size = 100, strokeW = 6;
-    const ns = 'http://www.w3.org/2000/svg';
-
-    function hexPoints(cx, cy, r) {
-        const pts = [];
-        for (let i = 0; i < 6; i++) {
-            const angle = (Math.PI / 180) * (60 * i - 90);
-            pts.push([cx + r * Math.cos(angle), cy + r * Math.sin(angle)]);
-        }
-        return pts;
-    }
-
-    const pts = hexPoints(size / 2, size / 2, size / 2 - strokeW);
-    const pStr = pts.map(p => p[0].toFixed(3) + ',' + p[1].toFixed(3)).join(' ');
-    const perim = pts.reduce((acc, p, i) => {
-        const b = pts[(i + 1) % pts.length];
-        return acc + Math.hypot(b[0] - p[0], b[1] - p[1]);
-    }, 0);
-
-    // Trilha de fundo
-    const track = document.createElementNS(ns, 'polygon');
-    track.setAttribute('points', pStr);
-    track.setAttribute('fill', 'none');
-    track.setAttribute('stroke', 'rgba(255,255,255,0.15)');
-    track.setAttribute('stroke-width', strokeW);
-    track.setAttribute('stroke-linejoin', 'round');
-    svgEl.appendChild(track);
-
-    // Arco animado
-    const prog = document.createElementNS(ns, 'polygon');
-    prog.setAttribute('points', pStr);
-    prog.setAttribute('fill', 'none');
-    prog.setAttribute('stroke', '#ffffff');
-    prog.setAttribute('stroke-width', strokeW);
-    prog.setAttribute('stroke-linecap', 'round');
-    prog.setAttribute('stroke-linejoin', 'round');
-    prog.setAttribute('stroke-dasharray', perim);
-    prog.setAttribute('stroke-dashoffset', perim);
-
-    const anim = document.createElementNS(ns, 'animate');
-    anim.setAttribute('attributeName', 'stroke-dashoffset');
-    anim.setAttribute('values', `${perim};${perim * 0.05};${-perim * 0.95}`);
-    anim.setAttribute('keyTimes', '0;0.5;1');
-    anim.setAttribute('dur', '1.4s');
-    anim.setAttribute('repeatCount', 'indefinite');
-    anim.setAttribute('calcMode', 'spline');
-    anim.setAttribute('keySplines', '0.4 0 0.2 1;0.4 0 0.2 1');
-    prog.appendChild(anim);
-
-    svgEl.appendChild(prog);
-}
 
 // === AGUARDA RECURSOS ===
 function waitForAllResources() {
@@ -164,24 +107,32 @@ function preventScroll(e) {
     return false;
 }
 
-// === ESCONDE O LOADER ===
+// === ESCONDE O LOADER (CORRIGIDO PARA O SEU HTML) ===
 function hideLoader() {
-    const loader = document.getElementById('loader');
+    // CORREÇÃO: Buscando pela classe do seu container principal do HTML (.loading-screen)
+    const loader = document.querySelector('.loading-screen');
 
     document.body.classList.remove('loading-locked');
-    document.getElementById('header').classList.remove('loading-hidden');
+    
+    const header = document.getElementById('header');
+    if (header) header.classList.remove('loading-hidden');
 
     ['wheel', 'touchmove', 'keydown'].forEach(event => {
         document.removeEventListener(event, preventScroll);
     });
 
-    loader.classList.add('hidden');
+    // Se o loader existir, aplica a classe de fade e depois destrói o elemento
+    if (loader) {
+        loader.classList.add('hidden');
 
-    setTimeout(() => {
-        loader.style.display = 'none';
-        loader.remove();
+        setTimeout(() => {
+            loader.style.display = 'none';
+            loader.remove();
+            reactivateAnimations();
+        }, 800); // 800ms é o tempo para o fade-out visual terminar
+    } else {
         reactivateAnimations();
-    }, 800);
+    }
 }
 
 // === REATIVA ANIMAÇÕES ===

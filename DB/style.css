@@ -153,6 +153,23 @@ body {
     line-height: 1;
 }
 
+.my-animated-icon {
+    color: white;
+    transition: 0.3s ease-in-out;
+}
+
+.buttonenter:hover .my-animated-icon {
+    transform: translatex(5px);
+}
+
+.buttonenter:hover #iconee {
+    color: #e5ff00;
+}
+
+.buttonenter:hover .my-animated-icon2 {
+    transform: translateY(-3px);
+}
+
 .buttonenter:hover {
     background-color: #e59917;
 }
@@ -169,6 +186,7 @@ body {
     padding-bottom: 1.5%;
     padding-top: 1.5%;
     vertical-align: middle;
+    transition: 0.3s ease-in-out;
 }
 
 /* detalhe */
@@ -210,7 +228,7 @@ body {
 
 
 .fundo1 {
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.412), rgb(0 0 0 / 0)), url('https://i.pinimg.com/originals/a9/0b/5d/a90b5d2b45605b32258201832c4c2d9a.gif');
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.619), rgb(0 0 0 / 0)), url('https://i.pinimg.com/originals/a9/0b/5d/a90b5d2b45605b32258201832c4c2d9a.gif');
     background-size: 100% 100%;
     height: 120vh;
 }
@@ -317,7 +335,7 @@ body {
     text-align: center;
     background-color: #fecd42;
     width: 100%;
-    border-radius: 16px;
+    border-radius: 16px 16px 0px 0px;
     aspect-ratio: 1;
     transition: 0.5s ease-in-out;
     object-fit: cover;
@@ -825,7 +843,9 @@ a {
     font-size: 80%;
 }
 
-css/* ======= mantenha seu CSS existente ======= */
+css
+
+/* ======= mantenha seu CSS existente ======= */
 body.loading-locked {
     overflow: hidden !important;
     height: 100vh !important;
@@ -835,43 +855,86 @@ body.loading-locked {
     left: 0;
 }
 
-#loader {
+/* Container principal da tela de carregamento */
+.loading-screen {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     background-color: #fecd42;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 99999;
-    transition: opacity 0.8s ease-out;
+    z-index: 9999;
 }
 
-#loader.hidden {
-    opacity: 0;
-    pointer-events: none;
+/* Container para controlar o tamanho do hexágono */
+.loader-container {
+    position: relative;
+    width: 120px;
+    height: 120px;
 }
 
-#header.loading-hidden {
-    display: none !important;
+/* O SVG agora fica 100% PARADO */
+.hexagon-svg {
+    width: 100%;
+    height: 100%;
 }
 
-.loading-locked *:not(#loader *) {
-    animation-play-state: paused !important;
-    transition: none !important;
+/* A mágica acontece exclusivamente aqui na linha da borda */
+.hexagon-border {
+    fill: none;
+    /* Miolo transparente */
+    stroke: #ffffff;
+    /* Cor da borda */
+    stroke-width: 5;
+    /* Espessura do traço */
+    stroke-linejoin: round;
+    /* Quinas arredondadas */
+
+    /* Como definimos que o total da borda mede 100 (via HTML):
+               Criamos uma linha de tamanho 40 e um espaço vazio de 60 */
+    stroke-dasharray: 40 10;
+
+    /* Animação contínua movendo apenas o ponto inicial do traço */
+    animation: correrBorda 1.5s linear infinite;
 }
 
-.loading-hidden {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
+/* Texto opcional abaixo do loader */
+.loading-text {
+    color: #ffffffb8;
+    margin-top: 25px;
+    font-size: 0.9rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    animation: pulsarTexto 1.5s ease-in-out infinite;
+    opacity: 0.8;
 }
 
-/* ======= loader hexagonal ======= */
-.hex-loader-svg {
-    width: 100px;
-    height: 100px;
-    overflow: visible;
+/* --- ANIMAÇÃO DA BORDA EM MOVIMENTO CONTÍNUO --- */
+@keyframes correrBorda {
+    0% {
+        stroke-dashoffset: 100;
+        /* Começa empurrando a linha por completo */
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+        /* Puxa a linha de volta no mesmo sentido, criando o loop infinito */
+    }
+}
+
+/* Efeito de fade suave no texto */
+@keyframes pulsarTexto {
+
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 1;
+    }
 }

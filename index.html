@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de Carregamento - Borda Dinâmica</title>
+    <style>
+        /* Reset padrão para garantir tela cheia */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #0d0e15; /* Fundo escuro estilo futurista */
+            overflow: hidden;
+        }
+
+        /* Container principal da tela de carregamento */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: #001eff00;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        /* Container para controlar o tamanho do hexágono */
+        .loader-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+        }
+
+        /* O SVG agora fica 100% PARADO */
+        .hexagon-svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* A mágica acontece exclusivamente aqui na linha da borda */
+        .hexagon-border {
+            fill: none;                 /* Miolo transparente */
+            stroke: #d4fe00;            /* Cor da borda */
+            stroke-width: 5;            /* Espessura do traço */
+            stroke-linejoin: round;     /* Quinas arredondadas */
+            
+            /* Como definimos que o total da borda mede 100 (via HTML):
+               Criamos uma linha de tamanho 40 e um espaço vazio de 60 */
+            stroke-dasharray: 40 10; 
+            
+            /* Animação contínua movendo apenas o ponto inicial do traço */
+            animation: correrBorda 1.5s linear infinite;
+        }
+
+        /* Texto opcional abaixo do loader */
+        .loading-text {
+            color: #acacacb8;
+            margin-top: 25px;
+            font-size: 0.9rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            animation: pulsarTexto 1.5s ease-in-out infinite;
+            opacity: 0.8;
+        }
+
+        /* --- ANIMAÇÃO DA BORDA EM MOVIMENTO CONTÍNUO --- */
+        @keyframes correrBorda {
+            0% {
+                stroke-dashoffset: 100; /* Começa empurrando a linha por completo */
+            }
+            100% {
+                stroke-dashoffset: 0; /* Puxa a linha de volta no mesmo sentido, criando o loop infinito */
+            }
+        }
+
+        /* Efeito de fade suave no texto */
+        @keyframes pulsarTexto {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="loading-screen">
+        <div class="loader-container">
+            <svg class="hexagon-svg" viewBox="0 0 100 100">
+                <polygon class="hexagon-border" points="50,5 90,28 90,72 50,95 10,72 10,28" pathLength="100" />
+            </svg>
+        </div>
+        <div class="loading-text">Carregando</div>
+    </div>
+
+</body>
+</html>
