@@ -3,100 +3,219 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tela de Carregamento - Borda Dinâmica</title>
-    <style>
-        /* Reset padrão para garantir tela cheia */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background-color: #0d0e15; /* Fundo escuro estilo futurista */
-            overflow: hidden;
-        }
-
-        /* Container principal da tela de carregamento */
-        .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background-color: #001eff00;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-
-        /* Container para controlar o tamanho do hexágono */
-        .loader-container {
-            position: relative;
-            width: 120px;
-            height: 120px;
-        }
-
-        /* O SVG agora fica 100% PARADO */
-        .hexagon-svg {
-            width: 100%;
-            height: 100%;
-        }
-
-        /* A mágica acontece exclusivamente aqui na linha da borda */
-        .hexagon-border {
-            fill: none;                 /* Miolo transparente */
-            stroke: #d4fe00;            /* Cor da borda */
-            stroke-width: 5;            /* Espessura do traço */
-            stroke-linejoin: round;     /* Quinas arredondadas */
-            
-            /* Como definimos que o total da borda mede 100 (via HTML):
-               Criamos uma linha de tamanho 40 e um espaço vazio de 60 */
-            stroke-dasharray: 40 10; 
-            
-            /* Animação contínua movendo apenas o ponto inicial do traço */
-            animation: correrBorda 1.5s linear infinite;
-        }
-
-        /* Texto opcional abaixo do loader */
-        .loading-text {
-            color: #acacacb8;
-            margin-top: 25px;
-            font-size: 0.9rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            animation: pulsarTexto 1.5s ease-in-out infinite;
-            opacity: 0.8;
-        }
-
-        /* --- ANIMAÇÃO DA BORDA EM MOVIMENTO CONTÍNUO --- */
-        @keyframes correrBorda {
-            0% {
-                stroke-dashoffset: 100; /* Começa empurrando a linha por completo */
-            }
-            100% {
-                stroke-dashoffset: 0; /* Puxa a linha de volta no mesmo sentido, criando o loop infinito */
-            }
-        }
-
-        /* Efeito de fade suave no texto */
-        @keyframes pulsarTexto {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
-    </style>
+    <title>Cards Dark - Viagens</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+<style>
+    /* Reset e configurações gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    background-color: #e5e5e5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Alinhamento dos Cards */
+.searruma {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    width: 100%;
+    flex-wrap: wrap; /* Permite quebrar linha em telas menores */
+}
+
+/* Estrutura Base do Card */
+.container {
+    width: 320px;
+    height: 460px;
+    border-radius: 32px; /* Bordas bem arredondadas da imagem */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Empurra o conteúdo para a base do card */
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.container:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 22px 40px rgba(0, 0, 0, 0.25);
+}
+
+/* Configuração de Imagem de Fundo para cada card específico */
+.card-alps {
+    background: url('https://images.unsplash.com/photo-1502784444187-359ac186c5bb?q=80&w=600&auto=format&fit=crop') center/cover no-repeat;
+}
+
+.card-iceland {
+    /* Usando a sua imagem original do Pinterest */
+    background: url('https://i.pinimg.com/736x/d5/dc/48/d5dc48a486d9d9ec2932f5c9646415ca.jpg') center/cover no-repeat;
+}
+
+.card-tokyo {
+    background: url('https://images.unsplash.com/photo-1503899036084-c55cdd92da26?q=80&w=600&auto=format&fit=crop') center/cover no-repeat;
+}
+
+/* O Segredo do Efeito Escuro / Gradiente (Overlay) */
+.conteudo-card {
+    width: 100%;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    /* Gradiente que começa transparente no topo e fica escuro/colorido na base */
+    background: linear-gradient(to top, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.75) 50%, rgba(15, 23, 42, 0) 100%);
+    backdrop-filter: blur(2px); /* Leve desfoque no fundo para o clima do design */
+}
+
+/* Ajustando as cores do gradiente para combinar com cada tema de foto (Opcional, mas dá o toque idêntico à imagem) */
+.card-alps .conteudo-card {
+    background: linear-gradient(to top, #11262c 0%, rgba(17, 38, 44, 0.8) 60%, rgba(17, 38, 44, 0) 100%);
+}
+.card-iceland .conteudo-card {
+    background: linear-gradient(to top, #2d3323 0%, rgba(45, 51, 35, 0.8) 60%, rgba(45, 51, 35, 0) 100%);
+}
+.card-tokyo .conteudo-card {
+    background: linear-gradient(to top, #241c24 0%, rgba(36, 28, 36, 0.8) 60%, rgba(36, 28, 36, 0) 100%);
+}
+
+/* Alinhamento de Título e Preço na mesma linha */
+.header-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.nome {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.preco {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 6px 12px;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+}
+
+/* Texto Descritivo */
+.desc {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin: 12px 0 16px 0;
+    font-weight: 400;
+}
+
+/* Grupo de Badges (Tags cinzas) */
+.badges-group {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.badge {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.12);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+/* Botão Reserve Branco */
+.btn-reserve {
+    background-color: #ffffff;
+    color: #000000;
+    border: none;
+    border-radius: 20px;
+    padding: 14px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.2s ease;
+}
+
+.btn-reserve:hover {
+    background-color: rgba(255, 255, 255, 0.85);
+}
+</style>
 <body>
 
-    <div class="loading-screen">
-        <div class="loader-container">
-            <svg class="hexagon-svg" viewBox="0 0 100 100">
-                <polygon class="hexagon-border" points="50,5 90,28 90,72 50,95 10,72 10,28" pathLength="100" />
-            </svg>
+    <div class="searruma">
+        
+        <div class="container card-alps">
+            <div class="conteudo-card">
+                <div class="header-card">
+                    <span class="nome">Swiss Alps Retreat</span>
+                    <span class="preco">$710</span>
+                </div>
+                
+                <h4 class="desc">Escape to a cozy alpine retreat with breathtaking views of snow-capped peaks and pristine valleys.</h4>
+                
+                <div class="badges-group">
+                    <span class="badge">Luxury Stay</span>
+                    <span class="badge">2 Day stay</span>
+                </div>
+                
+                <button class="btn-reserve">Reserve</button>
+            </div>
         </div>
-        <div class="loading-text">Carregando</div>
+
+        <div class="container card-iceland">
+            <div class="conteudo-card">
+                <div class="header-card">
+                    <span class="nome">Iceland Cabin</span>
+                    <span class="preco">$680</span>
+                </div>
+                
+                <h4 class="desc">Cozy cabin nestled in Iceland's breathtaking landscape, offering stunning views of mountains and Northern Lights.</h4>
+                
+                <div class="badges-group">
+                    <span class="badge">Top Rated</span>
+                    <span class="badge">5 Day stay</span>
+                </div>
+                
+                <button class="btn-reserve">Reserve</button>
+            </div>
+        </div>
+
+        <div class="container card-tokyo">
+            <div class="conteudo-card">
+                <div class="header-card">
+                    <span class="nome">Tokyo Penthouse</span>
+                    <span class="preco">$950</span>
+                </div>
+                
+                <h4 class="desc">A sleek penthouse in the heart of Tokyo, offering a blend of luxury, skyline views, and modern comfort.</h4>
+                
+                <div class="badges-group">
+                    <span class="badge">Cityscape View</span>
+                    <span class="badge">Weekend Stay</span>
+                </div>
+                
+                <button class="btn-reserve">Reserve</button>
+            </div>
+        </div>
+
     </div>
 
 </body>

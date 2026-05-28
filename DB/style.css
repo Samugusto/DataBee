@@ -41,9 +41,7 @@ body {
     padding: 0 30px;
     box-sizing: border-box;
     transition: top 0.3s;
-
 }
-
 
 .buttonenterheader {
     align-items: center;
@@ -70,7 +68,6 @@ body {
 }
 
 /* nome da empresa header */
-
 .empresa3 {
     font-family: 'Pixelify Sans', sans-serif;
     margin-left: 10%;
@@ -137,9 +134,8 @@ body {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    color: rgb(0, 0, 0);
+    color: #ffffff;
     border-radius: 50px;
-    background-color: #ffffff;
     font-size: 150%;
     padding-top: 0.5%;
     padding-bottom: 0.5%;
@@ -151,6 +147,30 @@ body {
     cursor: pointer;
     white-space: nowrap;
     line-height: 1;
+    border: 2px solid #ffffff;
+    background-color: rgba(255, 255, 255, 0.174);
+}
+
+.buttonenter2 {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #ffffff;
+    border-radius: 50px;
+    font-size: 150%;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    padding-left: 2%;
+    padding-right: 2%;
+    margin-top: 1%;
+    margin-right: 10px;
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+    white-space: nowrap;
+    line-height: 1;
+    border: 2px solid #ffffff;
+    background-color: rgba(255, 255, 255, 0.174);
 }
 
 .my-animated-icon {
@@ -163,7 +183,8 @@ body {
 }
 
 .buttonenter:hover #iconee {
-    color: #e5ff00;
+    color: #e59917;
+    background-color: #000000;
 }
 
 .buttonenter:hover .my-animated-icon2 {
@@ -171,7 +192,8 @@ body {
 }
 
 .buttonenter:hover {
-    background-color: #e59917;
+    color: #e59917;
+    background-color: #ffffff;
 }
 
 #iconee {
@@ -179,7 +201,7 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background-color: #000000;
+    border: 2px solid #000000;
     border-radius: 50px;
     padding-right: 1.5%;
     padding-left: 1.5%;
@@ -189,10 +211,33 @@ body {
     transition: 0.3s ease-in-out;
 }
 
+.my-animated-icon3 {
+    margin-left: 260px;
+    position: absolute;
+    z-index: 3;
+    color: white;
+    transition: 0.3s ease-in-out;
+    opacity: 0;
+}
+
+.buttonenter2:hover .my-animated-icon3 {
+    opacity: 1;
+}
+
+.buttonenter2:hover #iconee {
+    color: #e59917;
+    background-color: #000000;
+}
+
+.buttonenter2:hover {
+    padding-right: 3%;
+    color: #e59817;
+    background-color: white;
+}
+
 /* detalhe */
 .detalhes {
     font-size: 300%;
-
 }
 
 /* janelinha */
@@ -201,22 +246,19 @@ body {
     justify-content: center;
     display: flex;
     gap: 20px;
-    /* espaço entre elas */
 }
 
 .janelinha {
     color: white;
-    border: 1px solid rgb(255, 255, 255);
-    /* trocar cor */
     border-radius: 10px;
     margin-top: 3%;
     padding: 3%;
-    background-color: #ffffff39;
-    /* trocar cor */
+    background-color: #ffffff8d;
     padding-top: 10%;
     padding-bottom: 10%;
     padding-left: 20%;
     padding-right: 20%;
+    opacity: 0.9;
 }
 
 .janelinha2 {
@@ -225,15 +267,11 @@ body {
     justify-content: center;
 }
 
-
-
 .fundo1 {
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.619), rgb(0 0 0 / 0)), url('https://i.pinimg.com/originals/a9/0b/5d/a90b5d2b45605b32258201832c4c2d9a.gif');
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.097), rgba(0, 0, 0, 0.322)), url('https://i.pinimg.com/originals/a9/0b/5d/a90b5d2b45605b32258201832c4c2d9a.gif');
     background-size: 100% 100%;
     height: 120vh;
 }
-
-
 
 @keyframes gradientBG {
     0% {
@@ -262,7 +300,6 @@ body {
     margin-right: 45%;
     text-align: center;
 }
-
 
 .more2 {
     color: white;
@@ -303,7 +340,6 @@ body {
     align-items: center;
     gap: 1%;
     width: 100%;
-
 }
 
 .container {
@@ -313,11 +349,10 @@ body {
     align-items: center;
     justify-content: flex-start;
     background-color: rgba(255, 255, 255, 0.452);
-    height: auto;
-    width: 16%;
+    width: 17.5%;
     color: rgb(0, 0, 0);
     border-radius: 20px;
-    padding-bottom: 3%;
+    padding-bottom: 2%;
     transition: 0.3s ease-in-out;
     margin-bottom: 5%;
 }
@@ -325,6 +360,22 @@ body {
 .container:hover {
     border: 2px solid #fecd42;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.31);
+}
+
+#icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 196px;
+    margin-top: 10px;
+    width: 50px;
+    aspect-ratio: 1;
+    border-radius: 50px;
+    font-size: 200%;
+    background-color: #e59817;
+    color: white;
+    position: absolute;
+    z-index: 100;
 }
 
 #perf {
@@ -449,12 +500,27 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    width: 40%;
+    width: 60%;
     aspect-ratio: 1;
-    border-radius: 50%;
     object-fit: cover;
     box-sizing: border-box;
     transition: 0.3s ease-in-out;
+    border-radius: 100%;
+}
+
+#icon2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 125px;
+    width: 40px;
+    aspect-ratio: 1;
+    border-radius: 40px;
+    font-size: 170%;
+    background-color: #e59817;
+    color: white;
+    position: absolute;
+    z-index: 100;
 }
 
 .icone {
@@ -488,14 +554,33 @@ body {
 }
 
 #contato {
-    color: #190b28;
-    font-size: 200%;
+    color: #e59817;
+    font-size: 140%;
     transition: 0.3s ease-in-out;
 }
 
-#contato:hover {
+.contato2 {
+    margin-top: 10%;
+    display: flex;
+    width: 150px;
+    height: 40px;
+    justify-content: center;
+    background-color: #ffffff23;
+    border: 2px solid #e59817;
+    border-radius: 10px;
+    align-items: center;
+    font-size: 110%;
+    text-align: center;
+    transition: 0.3s ease-in-out;
+}
+
+.contato2:hover #contato {
     color: #fecd42;
-    filter: drop-shadow(0 20px 30px rgb(254, 204, 67));
+}
+
+.contato2:hover {
+    border: 2px solid #e59817;
+    background-color: #e59817;
 }
 
 /* texto centro  */
@@ -527,7 +612,6 @@ body {
 .container4:hover {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.31);
     border: 2px solid #fecd42;
-
 }
 
 #perf4 {
@@ -608,7 +692,6 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: row;
-    /* horizontal */
     gap: 15px;
 }
 
@@ -646,56 +729,6 @@ body {
     text-align: center;
 }
 
-@keyframes gradientBG {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-/* titulo */
-.titulo {
-    font-weight: bold;
-    font-size: 300%;
-    margin-top: 1%;
-    text-align: center;
-}
-
-/* frases */
-.frases {
-    color: #0000009a;
-    margin-top: 1%;
-    margin-left: 30%;
-    width: 40%;
-    font-size: 130%;
-    text-align: center;
-}
-
-/* containers */
-.searruma {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 1%;
-    width: 100%;
-
-}
-
-/* container novo*/
-.containernovo {
-    padding-top: 1%;
-    background-color: #f0f6f6;
-}
-
-
 /* outro container denovo denovo*/
 .container5 {
     margin-top: 2%;
@@ -709,7 +742,6 @@ body {
 #iconey {
     filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.127));
     position: relative;
-    /* Necessário para ancorar a segunda imagem */
     width: 40%;
     aspect-ratio: 1;
     overflow: hidden;
@@ -721,14 +753,10 @@ body {
     cursor: pointer;
 }
 
-/* IMAGEM DO HOVER (Fica escondida por cima da primeira) */
 #iconey::after {
     content: '';
     position: absolute;
     inset: 0;
-    /* Ocupa 100% do tamanho do card */
-
-    /* COLOQUE AQUI A SUA SEGUNDA IMAGEM */
     background-image: url('img/sem\ título.png');
     background-size: cover;
     background-position: center;
@@ -741,21 +769,14 @@ body {
     opacity: 1;
 }
 
-.info4 {
-    display: flex;
-    flex-direction: column;
-}
-
 .nome5 {
     color: #1e9672;
-    padding-left: 5%;
     font-size: 300%;
     font-weight: bold;
 }
 
 .desc5 {
     font-size: 120%;
-    padding-left: 5%;
     margin-bottom: 10%;
     color: #000000a3;
 }
@@ -763,16 +784,15 @@ body {
 /* literalmente o footer */
 footer {
     padding-top: 0%;
-    background-color: #145944;
+    background-color: #190b28;
 }
 
 .footernome {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     gap: 5px;
     padding-top: 2%;
-    padding-left: 5%;
     font-size: 300%;
     color: #ffff;
 }
@@ -782,6 +802,13 @@ footer {
     height: 1px;
     background-color: #ffff;
     margin: 30px auto;
+}
+
+.divissor {
+    width: 80%;
+    margin-top: 4%;
+    height: 2px;
+    background-color: #cfcfcf;
 }
 
 .footerbot {
@@ -810,8 +837,7 @@ a {
     color: #ffff;
     font-size: 120%;
     display: flex;
-    padding-left: 5%;
-    justify-content: flex-start;
+    justify-content: center;
 }
 
 .proje {
@@ -836,16 +862,26 @@ a {
     width: 3%;
 }
 
-.criador {
-    align-items: center;
-    text-align: center;
-    font-family: 'Pixelify Sans', sans-serif;
-    font-size: 80%;
+.option {
+    display: flex;
+    justify-content: center;
+    gap: 180px;
+    margin-bottom: 2%;
 }
 
-css
+.opt {
+    font-size: 120%;
+    color: #d1d1d1af;
+}
 
-/* ======= mantenha seu CSS existente ======= */
+.finall {
+    margin-top: 2%;
+    font-size: 100%;
+    color: white;
+    text-align: center;
+}
+
+/* Loading screen */
 body.loading-locked {
     overflow: hidden !important;
     height: 100vh !important;
@@ -855,7 +891,6 @@ body.loading-locked {
     left: 0;
 }
 
-/* Container principal da tela de carregamento */
 .loading-screen {
     position: fixed;
     top: 0;
@@ -870,39 +905,26 @@ body.loading-locked {
     z-index: 9999;
 }
 
-/* Container para controlar o tamanho do hexágono */
 .loader-container {
     position: relative;
     width: 120px;
     height: 120px;
 }
 
-/* O SVG agora fica 100% PARADO */
 .hexagon-svg {
     width: 100%;
     height: 100%;
 }
 
-/* A mágica acontece exclusivamente aqui na linha da borda */
 .hexagon-border {
     fill: none;
-    /* Miolo transparente */
     stroke: #ffffff;
-    /* Cor da borda */
     stroke-width: 5;
-    /* Espessura do traço */
     stroke-linejoin: round;
-    /* Quinas arredondadas */
-
-    /* Como definimos que o total da borda mede 100 (via HTML):
-               Criamos uma linha de tamanho 40 e um espaço vazio de 60 */
     stroke-dasharray: 40 10;
-
-    /* Animação contínua movendo apenas o ponto inicial do traço */
     animation: correrBorda 1.5s linear infinite;
 }
 
-/* Texto opcional abaixo do loader */
 .loading-text {
     color: #ffffffb8;
     margin-top: 25px;
@@ -913,20 +935,16 @@ body.loading-locked {
     opacity: 0.8;
 }
 
-/* --- ANIMAÇÃO DA BORDA EM MOVIMENTO CONTÍNUO --- */
 @keyframes correrBorda {
     0% {
         stroke-dashoffset: 100;
-        /* Começa empurrando a linha por completo */
     }
 
     100% {
         stroke-dashoffset: 0;
-        /* Puxa a linha de volta no mesmo sentido, criando o loop infinito */
     }
 }
 
-/* Efeito de fade suave no texto */
 @keyframes pulsarTexto {
 
     0%,
@@ -936,5 +954,491 @@ body.loading-locked {
 
     50% {
         opacity: 1;
+    }
+}
+
+
+/* =============================================
+   MEDIA QUERIES
+   ============================================= */
+
+/* --- TABLET (max-width: 1024px) --- */
+@media (max-width: 1024px) {
+
+    /* Header */
+    #header {
+        padding: 0 16px;
+        height: 60px;
+    }
+
+    .empresa3,
+    .empresa4 {
+        font-size: 180%;
+        margin-left: 4%;
+    }
+
+    .botoes {
+        gap: 6px;
+        padding-right: 2%;
+    }
+
+    .buttonenterheader {
+        font-size: 90%;
+        padding: 6px 12px;
+    }
+
+    /* Hero */
+    .fundo1 {
+        height: auto;
+        min-height: 100vh;
+        padding-bottom: 40px;
+    }
+
+    .logo {
+        padding-left: 43%;
+        width: 14%;
+    }
+
+    .empresa,
+    .empresa2 {
+        font-size: 300%;
+    }
+
+    .frase {
+        font-size: 150%;
+    }
+
+    .frase2 {
+        margin-left: 10%;
+        width: 80%;
+        font-size: 120%;
+    }
+
+    .buttonenter,
+    .buttonenter2 {
+        font-size: 120%;
+        padding: 8px 18px;
+    }
+
+    /* Títulos e frases de seção */
+    .titulo {
+        font-size: 220%;
+    }
+
+    .frases {
+        margin-left: 10%;
+        width: 80%;
+        font-size: 115%;
+    }
+
+    /* Cards .container (seção de serviços/produtos) */
+    .searruma {
+        flex-wrap: wrap;
+        gap: 2%;
+        padding: 0 2%;
+    }
+
+    .container,
+    .container2,
+    .container3 {
+        width: 34%;
+        margin-bottom: 4%;
+    }
+
+    /* container4 */
+    .container4 {
+        width: 44%;
+    }
+
+    /* container5 */
+    .container5 {
+        flex-direction: column;
+        align-items: center;
+        padding: 4%;
+    }
+
+    #iconey {
+        width: 30%;
+    }
+
+    .nome5 {
+        font-size: 220%;
+        text-align: center;
+    }
+
+    .desc5 {
+        text-align: center;
+    }
+
+    /* Motivador / CTA final */
+    .motivador {
+        font-size: 280%;
+        padding-top: 6%;
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .motivador2 {
+        font-size: 120%;
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+
+    .more,
+    .more2,
+    .more6 {
+        margin-left: 30%;
+        margin-right: 30%;
+    }
+
+    /* Footer */
+    .footernome {
+        font-size: 220%;
+    }
+
+    .option {
+        gap: 60px;
+        flex-wrap: wrap;
+        padding: 0 5%;
+    }
+
+    .imgfoot {
+        width: 4%;
+    }
+
+    .imagemfoot {
+        width: 5%;
+    }
+    
+    #icon2 {
+        margin-top: 190px;
+    }
+    
+    #icon {
+        margin-right: 280px;
+        margin-top: 10px;
+    }
+}
+
+
+
+/* --- MOBILE (max-width: 768px) --- */
+@media (max-width: 768px) {
+
+    /* Header */
+    #header {
+        height: 56px;
+        padding: 0 12px;
+    }
+
+    .empresa3,
+    .empresa4 {
+        font-size: 140%;
+        margin-left: 2%;
+    }
+
+    .logoheader {
+        height: 65%;
+    }
+
+    .botoes {
+        gap: 6px;
+        padding-right: 0;
+    }
+
+    .buttonenterheader {
+        font-size: 80%;
+        padding: 5px 10px;
+        max-width: 90px;
+    }
+
+    /* Hero */
+    .fundo1 {
+        background: linear-gradient(to bottom, rgba(255, 255, 255, 0.097), rgba(0, 0, 0, 0.322)), url('https://i.pinimg.com/736x/b1/f8/5a/b1f85abab7f739bd3859a659ec2ce5bc.jpg');
+        background-size: 100% 100%;
+        height: 120vh;
+        height: auto;
+        min-height: 100svh;
+        padding-bottom: 50px;
+        background-size: cover;
+    }
+
+    .logo {
+        padding-left: 35%;
+        width: 28%;
+        padding-top: 20%;
+    }
+
+    .textocentro2 {
+        padding-top: 50%;
+    }
+
+    .empresa,
+    .empresa2 {
+        font-size: 220%;
+    }
+
+    .frase {
+        font-size: 120%;
+        padding: 0 8%;
+    }
+
+    .frase2 {
+        margin-left: 5%;
+        width: 90%;
+        font-size: 105%;
+    }
+
+    .centralizador {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .buttonenter,
+    .buttonenter2 {
+        font-size: 105%;
+        padding: 10px 20px;
+        width: fit-content;
+    }
+
+    /* janelinha */
+    .containerj {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        padding: 0 5%;
+    }
+
+    .janelinha {
+        padding: 8% 10%;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Títulos e frases de seção */
+    .titulo {
+        font-size: 170%;
+        padding: 0 5%;
+    }
+
+    .frases {
+        margin-left: 5%;
+        width: 90%;
+        font-size: 105%;
+    }
+
+    /* Cards — empilham em coluna única */
+    .searruma {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        padding: 0 5%;
+    }
+
+    .container,
+    .container2,
+    .container3 {
+        width: 45%;
+        margin-bottom: 3%;
+    }
+
+    /* container4 */
+    .container4 {
+        width: 88%;
+        padding: 3%;
+    }
+
+    #perf4 {
+        font-size: 500%;
+        width: 18%;
+    }
+
+    .nome4 {
+        font-size: 105%;
+    }
+
+    /* container5 */
+    .container5 {
+        flex-direction: column;
+        align-items: center;
+        padding: 5%;
+    }
+
+    #iconey {
+        width: 30%;
+        margin-bottom: 8%;
+    }
+
+    .nome5 {
+        font-size: 180%;
+        text-align: center;
+    }
+
+    .desc5 {
+        font-size: 105%;
+        text-align: center;
+    }
+
+    /* Seção motivador / CTA final */
+    .motivador {
+        font-size: 200%;
+        padding: 10% 6% 0;
+    }
+
+    .motivador2 {
+        font-size: 110%;
+        padding-left: 6%;
+        padding-right: 6%;
+    }
+
+    .more,
+    .more2,
+    .more6 {
+        margin-left: 10%;
+        margin-right: 10%;
+        font-size: 105%;
+        padding-top: 2%;
+        padding-bottom: 2%;
+    }
+
+    .detalhes {
+        font-size: 200%;
+    }
+
+    /* Footer */
+    .footernome {
+        font-size: 160%;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 6% 4% 0;
+        text-align: center;
+    }
+
+    .option {
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+        padding: 0 8%;
+        margin-bottom: 6%;
+    }
+
+    .opt {
+        font-size: 105%;
+        text-align: center;
+    }
+
+    .imgfoot {
+        width: 7%;
+    }
+
+    .imagemfoot {
+        width: 10%;
+    }
+
+    .footerbot1 {
+        font-size: 160%;
+    }
+
+    .detalhess {
+        font-size: 105%;
+        text-align: center;
+        padding: 0 5%;
+    }
+
+    .proje {
+        padding: 4% 6%;
+        font-size: 90%;
+    }
+
+    /* Ícone flutuante */
+    .icone {
+        width: 6%;
+    }
+
+    /* animated icon offset */
+    .my-animated-icon3 {
+        margin-left: 160px;
+    }
+}
+
+
+/* --- MOBILE PEQUENO (max-width: 480px) --- */
+@media (max-width: 480px) {
+
+    #header {
+        height: 52px;
+    }
+
+    .empresa3,
+    .empresa4 {
+        font-size: 115%;
+    }
+
+    .logo {
+        padding-left: 30%;
+        width: 36%;
+    }
+
+    .textocentro2 {
+        padding-top: 65%;
+    }
+
+    .empresa,
+    .empresa2 {
+        font-size: 180%;
+    }
+
+    .frase {
+        font-size: 105%;
+    }
+
+    .titulo {
+        font-size: 145%;
+    }
+
+    .container,
+    .container2,
+    .container3 {
+        width: 64%;
+    }
+
+    .container4 {
+        width: 92%;
+    }
+
+    .motivador {
+        font-size: 160%;
+    }
+
+    .motivador2 {
+        font-size: 100%;
+    }
+
+    .more,
+    .more2,
+    .more6 {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    .footernome {
+        font-size: 130%;
+    }
+
+    .footerbot1 {
+        font-size: 130%;
+    }
+
+    .buttonenterheader {
+        display: none;
+    }
+
+    #icon2 {
+        margin-top: 160px;
+    }
+
+    #icon {
+        margin-left: 50px;
     }
 }
