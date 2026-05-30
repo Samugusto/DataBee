@@ -362,20 +362,24 @@ body {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.31);
 }
 
+
+
 #icon {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 196px;
-    margin-top: 10px;
     width: 50px;
     aspect-ratio: 1;
-    border-radius: 50px;
+    border-radius: 50%;
     font-size: 200%;
     background-color: #e59817;
     color: white;
-    position: absolute;
     z-index: 100;
+
+    /* MUDANÇA AQUI: */
+    position: absolute;
+    top: 10px;   /* Distância fixa a partir do TOPO da foto */
+    left: 10px;  /* Distância fixa a partir da ESQUERDA da foto */
 }
 
 #perf {
@@ -498,6 +502,7 @@ body {
 #perf3 {
     display: flex;
     justify-content: center;
+    justify-self: center;
     align-items: center;
     text-align: center;
     width: 60%;
@@ -508,19 +513,30 @@ body {
     border-radius: 100%;
 }
 
+.foto-wrapper {
+    position: relative;
+    display: inline-block; /* Faz a caixinha ter o tamanho exato da foto */
+}
+
+
+/* O seu ícone atualizado */
 #icon2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 125px;
     width: 40px;
     aspect-ratio: 1;
-    border-radius: 40px;
+    border-radius: 50%;
     font-size: 170%;
     background-color: #e59817;
     color: white;
-    position: absolute;
     z-index: 100;
+
+    /* Posicionamento absoluto baseado na FOTO */
+    position: absolute;
+    bottom: -15px; /* Se quiser ele MAIS para baixo, aumente para -20px. Se quiser MAIS para cima, diminua para -5px ou 0 */
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .icone {
@@ -1434,11 +1450,4 @@ body.loading-locked {
         display: none;
     }
 
-    #icon2 {
-        margin-top: 160px;
-    }
-
-    #icon {
-        margin-left: 50px;
-    }
 }
