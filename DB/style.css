@@ -88,10 +88,12 @@ body {
 
 /* logo */
 .logo {
+    display: flex;
     position: absolute;
     z-index: 1;
     padding-top: 7%;
-    padding-left: 45%;
+    justify-self: center;
+    justify-content: center;
     width: 10%;
 }
 
@@ -105,7 +107,7 @@ body {
 .empresa2 {
     font-family: 'Pixelify Sans', sans-serif;
     font-size: 400%;
-    color: #647130;
+    color: #f0f6f6;
 }
 
 /* frase motivacional */
@@ -338,7 +340,7 @@ body {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 1%;
+    gap: 2%;
     width: 100%;
 }
 
@@ -378,8 +380,10 @@ body {
 
     /* MUDANÇA AQUI: */
     position: absolute;
-    top: 10px;   /* Distância fixa a partir do TOPO da foto */
-    left: 10px;  /* Distância fixa a partir da ESQUERDA da foto */
+    top: 10px;
+    /* Distância fixa a partir do TOPO da foto */
+    left: 10px;
+    /* Distância fixa a partir da ESQUERDA da foto */
 }
 
 #perf {
@@ -515,7 +519,8 @@ body {
 
 .foto-wrapper {
     position: relative;
-    display: inline-block; /* Faz a caixinha ter o tamanho exato da foto */
+    display: inline-block;
+    /* Faz a caixinha ter o tamanho exato da foto */
 }
 
 
@@ -534,7 +539,8 @@ body {
 
     /* Posicionamento absoluto baseado na FOTO */
     position: absolute;
-    bottom: -15px; /* Se quiser ele MAIS para baixo, aumente para -20px. Se quiser MAIS para cima, diminua para -5px ou 0 */
+    bottom: -15px;
+    /* Se quiser ele MAIS para baixo, aumente para -20px. Se quiser MAIS para cima, diminua para -5px ou 0 */
     left: 50%;
     transform: translateX(-50%);
 }
@@ -1006,13 +1012,7 @@ body.loading-locked {
     /* Hero */
     .fundo1 {
         height: auto;
-        min-height: 100vh;
-        padding-bottom: 40px;
-    }
-
-    .logo {
-        padding-left: 43%;
-        width: 14%;
+        min-height: 80vh;
     }
 
     .empresa,
@@ -1125,14 +1125,19 @@ body.loading-locked {
     .imagemfoot {
         width: 5%;
     }
-    
+
     #icon2 {
         margin-top: 190px;
     }
-    
+
     #icon {
         margin-right: 280px;
         margin-top: 10px;
+    }
+
+    .logo {
+        padding-top: 1%;
+        width: 20%;
     }
 }
 
@@ -1180,8 +1185,7 @@ body.loading-locked {
     }
 
     .logo {
-        padding-left: 35%;
-        width: 28%;
+        width: 35%;
         padding-top: 20%;
     }
 
@@ -1392,8 +1396,8 @@ body.loading-locked {
     }
 
     .logo {
-        padding-left: 30%;
-        width: 36%;
+        padding-top: 35%;
+        width: 40%;
     }
 
     .textocentro2 {
