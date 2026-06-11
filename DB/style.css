@@ -29,7 +29,7 @@ body {
 
 /* Header */
 #header {
-    z-index: 2;
+    z-index: 999;
     position: fixed;
     top: 0;
     left: 0;
@@ -78,7 +78,7 @@ body {
 .empresa4 {
     font-family: 'Pixelify Sans', sans-serif;
     font-size: 250%;
-    color: #647130;
+    color: #ffffff;
 }
 
 /* logo empresa header */
@@ -270,7 +270,7 @@ body {
 }
 
 .fundo1 {
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.097), rgba(0, 0, 0, 0.829)), url('https://i.pinimg.com/originals/a9/0b/5d/a90b5d2b45605b32258201832c4c2d9a.gif');
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%, rgb(0, 0, 0) 100%), url('https://i.pinimg.com/originals/a9/0b/5d/a90b5d2b45605b32258201832c4c2d9a.gif');
     background-size: 100% 100%;
     height: 120vh;
 }
@@ -303,6 +303,19 @@ body {
     text-align: center;
 }
 
+.more0 {
+    color: rgb(0, 0, 0);
+    font-size: 120%;
+    border-radius: 10px;
+    background-color: #ffffff;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
+    margin-top: 3%;
+    margin-left: 45%;
+    margin-right: 45%;
+    text-align: center;
+}
+
 .more2 {
     color: white;
     font-size: 120%;
@@ -324,6 +337,14 @@ body {
     text-align: center;
 }
 
+.tituloW {
+    font-weight: bold;
+    font-size: 300%;
+    margin-top: 1%;
+    text-align: center;
+    color: white;
+}
+
 /* frases */
 .frases {
     color: #0000009a;
@@ -332,6 +353,85 @@ body {
     width: 40%;
     font-size: 130%;
     text-align: center;
+}
+
+.frasesW {
+    color: #ffffffbd;
+    margin-top: 2%;
+    margin-left: 30%;
+    width: 40%;
+    font-size: 150%;
+    text-align: center;
+}
+
+/* centralizador */
+.centraa {
+    display: flex;
+    gap: 20px;
+    position: relative;
+}
+
+.centre {
+    display: flex;
+    position: relative;
+}
+
+/* imagem grupo */
+.grupoimg {
+    display: block;
+    width: clamp(280px, 36vw, 420px);
+    max-width: 100%;
+    height: auto;
+    margin-top: 3%;
+    margin-right: 4%;
+    border-radius: 14px;
+    overflow: hidden;
+    z-index: 2;
+    flex: 0 0 auto;
+    rotate: -3deg;
+}
+
+.imagemdeta {
+    position: absolute;
+    width: clamp(140px, 18vw, 2000px);
+    left: -90px;
+    transform: rotate(70deg);
+}
+
+.imagemdeta0 {
+    position: absolute;
+    width: clamp(160px, 20vw, 2300px);
+    top: 70%;
+    left: -40px;
+    transform: rotate(30deg);
+
+}
+
+.Beea {
+    position: absolute;
+    width: clamp(140px, 18vw, 180px);
+    z-index: 6;
+    right: -5%;
+    top: 65%;
+    border-radius: 20px;
+}
+.fita {
+    position: absolute;
+    width: clamp(140px, 18vw, 180px);
+    z-index: 6;
+    right: -15%;
+    top: -10%;
+    rotate: 10deg;
+    border-radius: 20px;
+}
+.fita2 {
+    position: absolute;
+    width: clamp(140px, 18vw, 180px);
+    z-index: 6;
+    right: 75%;
+    top: -7%;
+    rotate: -200deg;
+    border-radius: 20px;
 }
 
 /* containers */
@@ -457,7 +557,28 @@ body {
     text-align: center;
 }
 
+.descc {
+    font-size: 150%;
+    text-align: left;
+    color: #ffffff;
+    margin-top: 4%;
+    margin-left: 4%;
+    position: relative;
+    z-index: 12;
+    flex: 1 1 52%;
+    max-width: 60%;
+    margin-right: 0;
+}
+
 /* container novo*/
+.containerBee {
+    position: relative;
+    overflow: hidden;
+    padding-top: 1%;
+    background-color: #000000;
+    padding-bottom: 3%;
+}
+
 .containernovo {
     padding-top: 1%;
     background-color: #f0f6f6;
@@ -1079,11 +1200,13 @@ body.loading-locked {
     }
 
     /* Títulos e frases de seção */
-    .titulo {
+    .titulo,
+    .tituloW {
         font-size: 220%;
     }
 
-    .frases {
+    .frases,
+    .frasesW {
         margin-left: 10%;
         width: 80%;
         font-size: 115%;
@@ -1144,7 +1267,8 @@ body.loading-locked {
 
     .more,
     .more2,
-    .more6 {
+    .more6,
+    .more0 {
         margin-left: 30%;
         margin-right: 30%;
     }
@@ -1217,7 +1341,7 @@ body.loading-locked {
 
     /* Hero */
     .fundo1 {
-        background: linear-gradient(to bottom, rgba(255, 255, 255, 0.097), rgba(0, 0, 0, 0.322)), url('https://i.pinimg.com/736x/b1/f8/5a/b1f85abab7f739bd3859a659ec2ce5bc.jpg');
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%, rgb(0, 0, 0) 100%), url('https://i.pinimg.com/736x/b1/f8/5a/b1f85abab7f739bd3859a659ec2ce5bc.jpg');
         background-size: 100% 100%;
         height: 120vh;
         height: auto;
@@ -1264,6 +1388,28 @@ body.loading-locked {
         width: fit-content;
     }
 
+    /* Ajustes responsivos para o bloco de apresentação */
+    .centraa {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .descc {
+        max-width: 90%;
+        text-align: center;
+        order: 0;
+    }
+
+    .grupoimg {
+        order: 1;
+        margin: 16px 0 0 0;
+    }
+
+    .imagemdeta0,
+    .imagemdeta {
+        width: 240px;
+    }
+
     /* janelinha */
     .containerj {
         flex-direction: column;
@@ -1279,12 +1425,14 @@ body.loading-locked {
     }
 
     /* Títulos e frases de seção */
-    .titulo {
+    .titulo,
+    .tituloW {
         font-size: 170%;
         padding: 0 5%;
     }
 
-    .frases {
+    .frases,
+    .frasesW {
         margin-left: 5%;
         width: 90%;
         font-size: 105%;
@@ -1356,7 +1504,8 @@ body.loading-locked {
 
     .more,
     .more2,
-    .more6 {
+    .more6,
+    .more0 {
         margin-left: 10%;
         margin-right: 10%;
         font-size: 105%;
@@ -1455,7 +1604,8 @@ body.loading-locked {
         font-size: 105%;
     }
 
-    .titulo {
+    .titulo,
+    .tituloW {
         font-size: 145%;
     }
 
@@ -1479,7 +1629,8 @@ body.loading-locked {
 
     .more,
     .more2,
-    .more6 {
+    .more6,
+    .more0 {
         margin-left: 5%;
         margin-right: 5%;
     }

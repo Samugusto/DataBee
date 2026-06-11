@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagem Recortada que Sobe com o Scroll</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+        }
+
+        /* 1. SEÇÃO PRINCIPAL (O CONTAINER) */
+        .secao-topo {
+            position: relative; /* O segredo está aqui: diz para a imagem se alinhar por este bloco */
+            height: 80vh;       /* Ocupa 80% da altura da tela */
+            background-color: #1e293b;
+            color: white;
+            padding: 40px;
+            overflow: hidden;   /* Esconde a parte da imagem que passar das bordas deste bloco */
+        }
+
+        /* 2. A IMAGEM ALINHADA AO CANTO DO BLOCO */
+        .imagem-recortada {
+            position: absolute; /* Fixa a imagem em relação ao .secao-topo */
+            bottom: -60px;      /* Joga 60px para fora do fundo do bloco */
+            right: -60px;       /* Joga 60px para fora da direita do bloco */
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 50%; /* Opcional: deixa a imagem redonda */
+        }
+
+        /* 3. SEÇÃO DE BAIXO (Apenas para dar scroll) */
+        .secao-baixo {
+            height: 1000px;     /* Espaço grande para você poder rolar a página */
+            padding: 40px;
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="secao-topo">
+        <h1>Topo do Site</h1>
+        <p>A imagem está cortada logo ali no canto inferior direito deste bloco escuro.</p>
+        
+        <img src="https://picsum.photos/400" alt="Imagem Recortada" class="imagem-recortada">
+    </div>
+
+    <div class="secao-baixo">
+        <h2>Conteúdo de Baixo</h2>
+        <p>Ao rolar para cá, veja que a imagem ficou lá em cima e não te seguiu!</p>
+    </div>
+
+</body>
+</html>
