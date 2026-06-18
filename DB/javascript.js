@@ -1,3 +1,19 @@
+    const lenis = new Lenis({
+      duration: 1.2, // Tempo da animação da rolagem (em segundos)
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Curva de suavização
+      smoothWheel: true
+    });
+
+    // Sincronizar o Lenis com o ScrollTrigger do GSAP
+    lenis.on('scroll', ScrollTrigger.update);
+
+    // Alimentar o "ticker" do GSAP com a animação do Lenis
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+
+    // Desativar a suavização de lag do GSAP para evitar conflitos de sincronia
+    gsap.ticker.lagSmoothing(0);
 // === LOADING REAL - ESPERA TUDO CARREGAR ===
 document.addEventListener('DOMContentLoaded', function() {
     document.body.classList.add('loading-locked');
@@ -187,3 +203,20 @@ function initScrollPrevent() {
         }
     }, { passive: false });
 }
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    // Evita o comportamento padrão do navegador (que daria um "pulo" seco)
+    e.preventDefault();
+
+    // Pega o destino (ex: "#secao-2")
+    const target = this.getAttribute('href');
+
+    // Usa a função mágica do Lenis para rolar suavemente
+    lenis.scrollTo(target, {
+      duration: 1.5,       // Duração da animação em segundos
+      offset: -50,         // Ajuste se você tiver um menu fixo no topo (ex: -80 para 80px de menu)
+      immediate: false,    // Se true, vai direto sem animação
+      lock: true           // Bloqueia o scroll do usuário enquanto a animação acontece
+    });
+  });
+});
