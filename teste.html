@@ -12,6 +12,7 @@
         * {
             margin: 0px;
             padding: 0px;
+            box-sizing: border-box;
         }
 
         .scroll-container {
@@ -28,17 +29,14 @@
             align-items: center;
             background-color: #111;
             z-index: 10;
-            /* Garante que a lateral fique acima de tudo */
         }
 
-        /* Painel da direita vira um "palco" relativo */
         .content-panel {
             width: 65%;
             height: 100vh;
             position: relative;
         }
 
-        /* Todos os blocos ficam empilhados no mesmo lugar (absolute) */
         .section-block {
             position: absolute;
             top: 0;
@@ -50,14 +48,11 @@
             justify-content: center;
             padding: 0 10%;
             color: rgb(0, 0, 0);
-
-            /* Escondemos todos por padrão */
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
         }
 
-        /* O primeiro bloco começa visível */
         .section-block.active {
             opacity: 1;
             visibility: visible;
@@ -72,10 +67,46 @@
             border-radius: 8px;
         }
 
+        /* Container que agrupa os indicadores e a linha */
+        .indicators-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+        }
+
+        /* Linha de fundo cinza (apagada) */
+        .progress-line-bg {
+            position: absolute;
+            left: 0; /* Alinha à esquerda dos números, ajuste se preferir à direita */
+            top: 10px;
+            bottom: 10px;
+            width: 4px;
+            background-color: #444;
+            border-radius: 2px;
+        }
+
+        /* Linha ativa que vai crescer com o scroll */
+        .progress-line-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffcd42; /* Cor ativa igual à do número */
+            transform-origin: top;
+            transform: scaleY(0); /* Começa zerada */
+            border-radius: 2px;
+        }
+
         .indicators {
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 40px; /* Aumentado um pouco para dar mais espaço à linha */
+            position: relative;
+            z-index: 2;
+            padding-left: 20px; /* Afasta o número da linha */
         }
 
         .indicator {
@@ -95,10 +126,16 @@
     <div class="scroll-container">
 
         <aside class="lateral-panel">
-            <div class="indicators">
-                <div class="indicator active">01</div>
-                <div class="indicator">02</div>
-                <div class="indicator">03</div>
+            <div class="indicators-wrapper">
+                <div class="progress-line-bg">
+                    <div class="progress-line-fill"></div>
+                </div>
+                
+                <div class="indicators">
+                    <div class="indicator active">01</div>
+                    <div class="indicator">02</div>
+                    <div class="indicator">03</div>
+                </div>
             </div>
         </aside>
 
@@ -137,46 +174,51 @@
     <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
 
     <script>
-gsap.registerPlugin(ScrollTrigger);
+        gsap.registerPlugin(ScrollTrigger);
 
-// Inicializar o Lenis (Smooth Scroll)
-const lenis = new Lenis({ duration: 1.2, smoothWheel: true });
-lenis.on('scroll', ScrollTrigger.update);
-gsap.ticker.add((time) => lenis.raf(time * 1000));
-gsap.ticker.lagSmoothing(0);
+        // Inicializar o Lenis (Smooth Scroll)
+        const lenis = new Lenis({ duration: 1.2, smoothWheel: true });
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => lenis.raf(time * 1000));
+        gsap.ticker.lagSmoothing(0);
 
-// Selecionar os elementos
-const blocks = document.querySelectorAll('.section-block');
-const indicators = document.querySelectorAll('.indicator');
+        // Selecionar os elementos
+        const blocks = document.querySelectorAll('.section-block');
+        const indicators = document.querySelectorAll('.indicator');
+        const lineFill = document.querySelector('.progress-line-fill');
 
-// Criar a Timeline Master que controla o efeito
-const tl = gsap.timeline({
-  scrollTrigger: {
-    trigger: ".scroll-container",
-    start: "top top",
-    end: "+=3000",       // Quanto maior o número, mais o usuário tem que rolar para passar de fase
-    pin: true,           // Trava o container inteiro (Esquerda e Direita grudam na tela)
-    scrub: 1,            // Vincula a animação ao scroll perfeitamente
-  }
-});
+        // Criar a Timeline Master que controla o efeito
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".scroll-container",
+                start: "top top",
+                end: "+=3000",       
+                pin: true,           
+                scrub: 1,            
+            }
+        });
 
-// Criamos a animação de transição para cada bloco (a partir do segundo)
-blocks.forEach((block, index) => {
-  if (index === 0) return; // Pula o primeiro porque ele já começa visível
+        // Quantidade total de blocos para calcular as frações da linha
+        const totalBlocks = blocks.length;
 
-  // 1. Apaga o indicador anterior e acende o atual
-  tl.to(indicators[index - 1], { color: "#444", duration: 0.5 }, `passo-${index}`)
-    .to(indicators[index], { color: "#ffcd42", duration: 0.3 }, `passo-${index}`)
+        // Criamos a animação de transição para cada bloco
+        blocks.forEach((block, index) => {
+            if (index === 0) return; 
 
-  // 2. Apaga o bloco de conteúdo anterior (fade-out)
-  tl.to(blocks[index - 1], { opacity: 0, autoAlpha: 0, duration: 0.5 }, `passo-${index}`)
-  
-  // 3. Acende o novo bloco de conteúdo (fade-in) de forma estática
-  tl.to(block, { opacity: 1, autoAlpha: 1, duration: 0.5 }, `passo-${index}+=0.2`);
-  
-  // Uma pequena pausa na timeline para o usuário conseguir ler o conteúdo antes de ir pro próximo
-  tl.to({}, { duration: 1 }); 
-});
+            // Calcula quanto da linha deve ser preenchido neste passo (ex: 50% no indicador 2, 100% no indicador 3)
+            const progressProgressiva = index / (totalBlocks - 1);
+
+            // Animação sincronizada do texto, números e o crescimento da linha amarela
+            tl.to(indicators[index - 1], { color: "#444", duration: 0.5 }, `passo-${index}`)
+              .to(indicators[index], { color: "#ffcd42", duration: 0.3 }, `passo-${index}`)
+              .to(lineFill, { scaleY: progressProgressiva, duration: 0.5, ease: "none" }, `passo-${index}`) // Move a linha junto
+
+            // Apaga o bloco anterior e acende o próximo
+            tl.to(blocks[index - 1], { opacity: 0, autoAlpha: 0, duration: 0.5 }, `passo-${index}`)
+              .to(block, { opacity: 1, autoAlpha: 1, duration: 0.5 }, `passo-${index}+=0.2`);
+            
+            tl.to({}, { duration: 1 }); 
+        });
     </script>
 </body>
 
