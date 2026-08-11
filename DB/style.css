@@ -108,7 +108,7 @@ body {
 
 /* logo empresa header */
 .logoheader {
-    height: 80%;
+    height: 90%;
 }
 
 /* logo */
@@ -152,6 +152,8 @@ body {
 }
 
 .wow {
+    background-color: #fecd42;
+    padding: 0.2%;
     color: #190b28;
 }
 
@@ -1115,7 +1117,7 @@ a {
 }
 
 .imagemfoot {
-    width: 13%;
+    width: 10%;
     margin-left: 5%;
 }
 
@@ -1138,6 +1140,7 @@ a {
 }
 
 .separator {
+    font-size: 130%;
     color: white;
 }
 
