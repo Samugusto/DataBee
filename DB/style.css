@@ -988,7 +988,7 @@ body {
     aspect-ratio: 1;
     overflow: hidden;
     margin-bottom: 5%;
-    background-image: url('img/sem\ título2.png');
+    background-image: url('img/sem\ título2.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -999,7 +999,7 @@ body {
     content: '';
     position: absolute;
     inset: 0;
-    background-image: url('img/sem\ título.png');
+    background-image: url('img/sem\ título.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
