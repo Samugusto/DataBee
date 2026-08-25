@@ -7,6 +7,17 @@
     background-color: #fecd42;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #190b28;
+}
+::-webkit-scrollbar-thumb {
+  background: #fecd42;
+  border-radius: 5px;
+}
+
 html {
     overflow-x: hidden;
 }
