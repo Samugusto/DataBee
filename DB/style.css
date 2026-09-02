@@ -1362,10 +1362,15 @@ body.loading-locked {
     position: absolute;
     bottom: 0;
     right: 20%;
-    width: 200px;
-    height: 180px;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%, rgb(0, 0, 0) 100%), url('https://i.pinimg.com/1200x/f8/43/f2/f843f2beb637f1377bfe7b841f26ca9b.jpg');
-    background-size: 100% 100%;
+    width: 280px;
+    height: 300px;
+}
+.Beea-3D2 {
+    position: absolute;
+    bottom: 0;
+    right: 20%;
+    width: 280px;
+    height: 300px;
 }
 
 /* Container que agrupa os indicadores e a linha */
