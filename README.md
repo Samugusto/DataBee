@@ -13,10 +13,10 @@
 
 | Nome  | Funções |
 | ------------- | ------------- |
-| Gabriela de Moura  | FullStack / Project owner  |
+| Gabriela de Moura (PO) | FullStack / Project owner  |
 | Diego Tavares  | Criação e análise de banco de dados  |
 | Amanda Monteleone  | Documentação e testes  |
-| Yago Pavan  | Back-End  |
+| Yago Pavan (Scrum mMaster) | Back-End  |
 | Samuel Barbosa  | Front-End  |
 <br>
 <hr>
