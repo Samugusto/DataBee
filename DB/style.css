@@ -1218,6 +1218,7 @@ a {
 }
 
 /* Loading screen */
+/* Loading screen */
 body.loading-locked {
     overflow: hidden !important;
     height: 100vh !important;
@@ -1239,12 +1240,14 @@ body.loading-locked {
     justify-content: center;
     align-items: center;
     z-index: 9999;
+    will-change: transform, border-radius;
 }
 
 .loader-container {
     position: relative;
-    width: 120px;
-    height: 120px;
+    width: 80px;
+    height: 80px;
+    will-change: transform, opacity;
 }
 
 .hexagon-svg {
@@ -1257,45 +1260,34 @@ body.loading-locked {
     stroke: #ffffff;
     stroke-width: 5;
     stroke-linecap: round;
-    /* Deixa as pontas do traço animado redondinhas */
     stroke-dasharray: 40 10;
-    animation: correrBorda 1.5s linear infinite;
-}
-
-@keyframes correrBorda {
-    to {
-        stroke-dashoffset: -50;
-        /* Anda exatamente o tamanho do traço + espaço */
-    }
-}
-
-.loading-text {
-    color: #ffffffb8;
-    margin-top: 25px;
-    font-size: 0.9rem;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    animation: pulsarTexto 1.5s ease-in-out infinite;
-    opacity: 0.8;
+    animation: correrBorda 1.2s linear infinite;
 }
 
 @keyframes correrBorda {
     0% {
         stroke-dashoffset: 100;
     }
-
     100% {
         stroke-dashoffset: 0;
     }
 }
 
-@keyframes pulsarTexto {
+.loading-text {
+    color: #ffffffb8;
+    margin-top: 14px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: pulsarTexto 1.5s ease-in-out infinite;
+    opacity: 0.8;
+    will-change: opacity, transform;
+}
 
-    0%,
-    100% {
+@keyframes pulsarTexto {
+    0%, 100% {
         opacity: 0.3;
     }
-
     50% {
         opacity: 1;
     }

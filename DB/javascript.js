@@ -124,6 +124,9 @@ function preventScroll(e) {
 
 function hideLoader() {
     const loader = document.querySelector('.loading-screen');
+    const loaderContent = document.querySelectorAll('.loader-container, .loading-text');
+
+    // Libera a rolagem do site
     document.body.classList.remove('loading-locked');
     
     const header = document.getElementById('header');
@@ -133,16 +136,42 @@ function hideLoader() {
         document.removeEventListener(event, preventScroll);
     });
 
-    if (loader) {
-        loader.classList.add('hidden');
-        setTimeout(() => {
+    if (!loader) {
+        reactivateAnimations();
+        return;
+    }
+
+    // Sequência da animação
+    const tl = gsap.timeline({
+        onComplete: () => {
             loader.style.display = 'none';
             loader.remove();
-            reactivateAnimations(); // CHAMA AS ANIMAÇÕES APÓS O LOADER SUMIR
-        }, 800);
-    } else {
-        reactivateAnimations();
-    }
+            reactivateAnimations(); // Reativa ScrollTrigger e animações da página
+        }
+    });
+
+    tl
+    // 1. Esconde o ícone e o texto do loader suavemente para cima
+    .to(loaderContent, {
+        opacity: 0,
+        y: -30,
+        duration: 0.35,
+        ease: "power2.in"
+    })
+    // 2. Encolhe a tela de fundo transformando-a em um retângulo de bordas arredondadas
+    .to(loader, {
+        scaleX: 0.9,
+        scaleY: 0.8,
+        borderRadius: "24px",
+        duration: 0.5,
+        ease: "power3.inOut"
+    })
+    // 3. Desliza o retângulo para baixo saindo completamente da viewport
+    .to(loader, {
+        y: "100vh",
+        duration: 0.7,
+        ease: "power4.in"
+    });
 }
 
 // ==========================================
