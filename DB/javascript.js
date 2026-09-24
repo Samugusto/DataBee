@@ -23,9 +23,9 @@ gsap.ticker.lagSmoothing(0);
 // ==========================================
 // 2. SISTEMA DE CARREGAMENTO (PRELOADER)
 // ==========================================
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     document.body.classList.add('loading-locked');
-    
+
     const header = document.getElementById('header');
     if (header) header.classList.add('loading-hidden');
 
@@ -128,7 +128,7 @@ function hideLoader() {
 
     // Libera a rolagem do site
     document.body.classList.remove('loading-locked');
-    
+
     const header = document.getElementById('header');
     if (header) header.classList.remove('loading-hidden');
 
@@ -151,27 +151,24 @@ function hideLoader() {
     });
 
     tl
-    // 1. Esconde o ícone e o texto do loader suavemente para cima
-    .to(loaderContent, {
-        opacity: 0,
-        y: -30,
-        duration: 0.35,
-        ease: "power2.in"
-    })
-    // 2. Encolhe a tela de fundo transformando-a em um retângulo de bordas arredondadas
-    .to(loader, {
-        scaleX: 0.9,
-        scaleY: 0.8,
-        borderRadius: "24px",
-        duration: 0.5,
-        ease: "power3.inOut"
-    })
-    // 3. Desliza o retângulo para baixo saindo completamente da viewport
-    .to(loader, {
-        y: "100vh",
-        duration: 0.7,
-        ease: "power4.in"
-    });
+        .to(loaderContent, {
+            opacity: 0,
+            y: -30,
+            duration: 0.35,
+            ease: "power2.in"
+        })
+        .to(loader, {
+            scaleX: 0.9,
+            scaleY: 0.8,
+            borderRadius: "24px",
+            duration: 0.5,
+            ease: "power3.inOut"
+        })
+        .to(loader, {
+            y: "100vh",
+            duration: 0.7,
+            ease: "power4.in"
+        });
 }
 
 // ==========================================
@@ -182,9 +179,9 @@ function reactivateAnimations() {
     initMotivadorObserver();
     initScrollPrevent();
     initLateralPinSection(); // Inicializa o seu código novo aqui!
-    
+
     // Atualiza o ScrollTrigger após tudo estar visível para recalcular alturas
-    ScrollTrigger.refresh(); 
+    ScrollTrigger.refresh();
 }
 
 function initHeaderObserver() {
@@ -217,14 +214,18 @@ function initMotivadorObserver() {
         motivadorObserver.observe(el);
     });
 
-    document.querySelectorAll(".botao-animado").forEach((el, index) => {
+    const elementos = document.querySelectorAll(
+        ".botao-animado, .botao-animado-direita, .botao-animado-esquerda"
+    );
+
+    elementos.forEach((el, index) => {
         el.style.transitionDelay = `${index * 0.2}s`;
         motivadorObserver.observe(el);
     });
 }
 
 function initScrollPrevent() {
-    window.addEventListener('wheel', function(e) {
+    window.addEventListener('wheel', function (e) {
         if (Math.abs(e.deltaX) > 0) {
             e.preventDefault();
         }
@@ -255,17 +256,17 @@ function initLateralPinSection() {
     });
 
     blocks.forEach((block, index) => {
-        if (index === 0) return; 
+        if (index === 0) return;
 
         const progressProgressiva = index / (totalBlocks - 1);
 
         tl.to(indicators[index - 1], { color: "#444", duration: 0.5 }, `passo-${index}`)
-          .to(indicators[index], { color: "#ffcd42", duration: 0.3 }, `passo-${index}`)
-          .to(lineFill, { scaleY: progressProgressiva, duration: 0.5, ease: "none" }, `passo-${index}`)
-          .to(blocks[index - 1], { opacity: 0, autoAlpha: 0, duration: 0.5 }, `passo-${index}`)
-          .to(block, { opacity: 1, autoAlpha: 1, duration: 0.5 }, `passo-${index}+=0.2`);
-        
-        tl.to({}, { duration: 1 }); 
+            .to(indicators[index], { color: "#ffcd42", duration: 0.3 }, `passo-${index}`)
+            .to(lineFill, { scaleY: progressProgressiva, duration: 0.5, ease: "none" }, `passo-${index}`)
+            .to(blocks[index - 1], { opacity: 0, autoAlpha: 0, duration: 0.5 }, `passo-${index}`)
+            .to(block, { opacity: 1, autoAlpha: 1, duration: 0.5 }, `passo-${index}+=0.2`);
+
+        tl.to({}, { duration: 1 });
     });
 }
 

@@ -166,6 +166,7 @@ body {
     background-color: #fecd42;
     padding: 0.2%;
     color: #190b28;
+    border-radius: 10px;
 }
 
 /* botão entrar*/
@@ -174,7 +175,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    color: #eb0c0c;
+    color: #fff;
     border-radius: 50px;
     font-size: 110%;
     padding-top: 0.5%;
@@ -187,8 +188,8 @@ body {
     cursor: pointer;
     white-space: nowrap;
     line-height: 1;
-    border: 2px solid #e51616;
-    background-color: rgba(255, 255, 255, 0.174);
+    border: 2px solid transparent;
+    background-color: #fecc42aa;
 }
 
 .buttonenter2 {
@@ -234,6 +235,7 @@ body {
 .buttonenter:hover {
     color: #e59917;
     background-color: #ffffff;
+    border: 2px solid #fecd42;
 }
 
 #iconee {
@@ -325,7 +327,7 @@ body {
     width: 100%;
 }
 
-.hexcode{
+.hexcode {
     width: 350px;
 }
 
@@ -967,6 +969,28 @@ body {
 .botao-animado.ativo {
     opacity: 1;
     transform: translateY(0);
+    transition: all 0.6s ease;
+}
+
+.botao-animado-direita {
+    opacity: 0;
+    transform: translateX(40px);
+}
+
+.botao-animado-direita.ativo {
+    opacity: 1;
+    transform: translateX(0);
+    transition: all 0.6s ease;
+}
+
+.botao-animado-esquerda {
+    opacity: 0;
+    transform: translateX(-40px);
+}
+
+.botao-animado-esquerda.ativo {
+    opacity: 1;
+    transform: translateX(0);
     transition: all 0.6s ease;
 }
 
