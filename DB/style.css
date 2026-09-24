@@ -138,31 +138,28 @@ body {
 
 /* nome empresa */
 .empresa {
-    font-size: 400%;
+    font-size: 300%;
     font-family: 'Pixelify Sans', sans-serif;
     color: #fecd42;
+    font-weight: 300;
 }
 
 .empresa2 {
     font-family: 'Pixelify Sans', sans-serif;
-    font-size: 400%;
-    color: #f0f6f6;
+    color: #e59817;
 }
 
 /* frase motivacional */
 .frase {
-    color: #ffff;
+    color: #000000;
     font-size: 180%;
-    text-align: center;
 }
 
 /* frase */
 .frase2 {
-    color: #ffffffc6;
-    margin-left: 25%;
-    text-align: center;
-    width: 50%;
-    font-size: 140%;
+    color: #333232c6;
+    width: 80%;
+    font-size: 110%;
 }
 
 .wow {
@@ -177,9 +174,9 @@ body {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    color: #ffffff;
+    color: #eb0c0c;
     border-radius: 50px;
-    font-size: 150%;
+    font-size: 110%;
     padding-top: 0.5%;
     padding-bottom: 0.5%;
     padding-left: 2%;
@@ -190,7 +187,7 @@ body {
     cursor: pointer;
     white-space: nowrap;
     line-height: 1;
-    border: 2px solid #ffffff;
+    border: 2px solid #e51616;
     background-color: rgba(255, 255, 255, 0.174);
 }
 
@@ -311,9 +308,29 @@ body {
 }
 
 .fundo1 {
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%, rgb(0, 0, 0) 100%), url('img/gif-abelha.gif');
+    background-color: #f9f9db;
     background-size: 100% 100%;
-    height: 120vh;
+    height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.inicio {
+    gap: 4%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.hexcode{
+    width: 350px;
+}
+
+.inicio2frases {
+    display: grid;
 }
 
 @keyframes gradientBG {
@@ -1268,6 +1285,7 @@ body.loading-locked {
     0% {
         stroke-dashoffset: 100;
     }
+
     100% {
         stroke-dashoffset: 0;
     }
@@ -1285,9 +1303,12 @@ body.loading-locked {
 }
 
 @keyframes pulsarTexto {
-    0%, 100% {
+
+    0%,
+    100% {
         opacity: 0.3;
     }
+
     50% {
         opacity: 1;
     }
@@ -1340,7 +1361,8 @@ body.loading-locked {
     visibility: visible;
     pointer-events: auto;
 }
-.img-BeeaInterac{
+
+.img-BeeaInterac {
     position: relative;
 }
 
@@ -1351,6 +1373,7 @@ body.loading-locked {
     margin-bottom: 20px;
     border-radius: 8px;
 }
+
 .Beea-3D {
     position: absolute;
     bottom: 0;
@@ -1358,6 +1381,7 @@ body.loading-locked {
     width: 280px;
     height: 300px;
 }
+
 .Beea-3D2 {
     position: absolute;
     bottom: 0;
