@@ -327,9 +327,12 @@ body {
     width: 100%;
 }
 
+
 .hexcode {
-    width: 350px;
+    width: 580px;
+    top: 20;
 }
+
 
 .inicio2frases {
     display: grid;
