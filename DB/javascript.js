@@ -285,3 +285,16 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         });
     });
 });
+document.querySelectorAll('.buttonenter').forEach(button => {
+    button.addEventListener('pointermove', event => {
+        const rect = button.getBoundingClientRect();
+        const offsetX = event.clientX - (rect.left + rect.width / 2);
+        const offsetY = event.clientY - (rect.top + rect.height / 2);
+
+        button.style.transform = `translate(${offsetX * 0.18}px, ${offsetY * 0.18}px)`;
+    });
+
+    button.addEventListener('pointerleave', () => {
+        button.style.transform = '';
+    });
+});

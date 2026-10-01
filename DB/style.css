@@ -138,7 +138,6 @@ body {
 
 /* nome empresa */
 .empresa {
-    font-size: 300%;
     font-family: 'Pixelify Sans', sans-serif;
     color: #fecd42;
     font-weight: 300;
@@ -212,6 +211,32 @@ body {
     line-height: 1;
     border: 2px solid #ffffff;
     background-color: rgba(255, 255, 255, 0.174);
+}
+
+.buttonenterS {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: #fff;
+    border-radius: 50px;
+    font-size: 110%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-left: 2%;
+    padding-right: 2%;
+    margin-top: 1%;
+    margin-right: 10px;
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+    white-space: nowrap;
+    line-height: 1;
+    border: 2px solid transparent;
+    background-color: #190b28;
+}
+
+.buttonenterS:hover {
+    background-color: #beb6b6;
 }
 
 .my-animated-icon {
@@ -310,32 +335,65 @@ body {
 }
 
 .fundo1 {
+    position: relative;
+    isolation: isolate;
     background-color: #f9f9db;
-    background-size: 100% 100%;
-    height: 100vh;
+    background-image: radial-gradient(circle, #fecc4284 1.8px, transparent 1.8px);
+    background-size: 20px 20px;
+    min-height: 100svh;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    overflow: hidden;
+    padding: 5rem clamp(1rem, 4vw, 3rem);
 }
 
+
 .inicio {
-    gap: 4%;
+    gap: clamp(1.5rem, 4vw, 4rem);
     align-items: center;
     display: flex;
     justify-content: center;
-    width: 100%;
+    width: min(100%, 1280px);
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
 }
 
+.blob1 {
+    position: absolute;
+    top: clamp(-80px, -6vw, -30px);
+    right: clamp(-100px, -7vw, -24px);
+    width: min(34vw, 400px);
+    pointer-events: none;
+}
+
+.blob2 {
+    position: absolute;
+    width: min(34vw, 400px);
+    bottom: clamp(-160px, -8vw, -50px);
+    right: clamp(-90px, -6vw, -24px);
+    pointer-events: none;
+}
 
 .hexcode {
-    width: 580px;
-    top: 20;
+    width: min(46vw, 580px);
+    height: auto;
+    flex: 0 1 580px;
+    object-fit: contain;
 }
 
 
 .inicio2frases {
     display: grid;
+    flex: 1 1 28rem;
+    min-width: 0;
+}
+
+.logoDB {
+    width: clamp(100px, 12vw, 150px);
+    height: auto;
 }
 
 @keyframes gradientBG {
@@ -1507,23 +1565,47 @@ body.loading-locked {
 
     /* Hero */
     .fundo1 {
-        height: auto;
-        min-height: 80vh;
+        background-image: radial-gradient(circle, #fecc4284 1.8px, transparent 1.8px),
+            linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%, rgb(0, 0, 0) 100%)
+        background-size: 20px 20px, cover, cover;
+        background-position: left top, center, center;
+        background-repeat: repeat, no-repeat, no-repeat;
+        min-height: 80svh;
+        padding: 5.5rem 1.5rem 3rem;
     }
 
-    .empresa,
-    .empresa2 {
-        font-size: 300%;
+    .inicio {
+        gap: 2rem;
     }
+
+    .hexcode {
+        width: min(42vw, 440px);
+    }
+
+    .inicio2frases {
+        flex-basis: 22rem;
+    }
+
+    .blob1 {
+        top: -50px;
+        right: -60px;
+        width: min(34vw, 320px);
+    }
+
+    .blob2 {
+        right: -50px;
+        width: min(34vw, 320px);
+    }
+
 
     .frase {
         font-size: 150%;
     }
 
     .frase2 {
-        margin-left: 10%;
-        width: 80%;
-        font-size: 120%;
+        margin-left: 0;
+        width: 100%;
+        font-size: 110%;
     }
 
     .buttonenter,
@@ -1645,16 +1727,6 @@ body.loading-locked {
         font-size: 100%;
     }
 
-    .fundo1 {
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%, rgb(0, 0, 0) 100%), url('https://i.pinimg.com/736x/b1/f8/5a/b1f85abab7f739bd3859a659ec2ce5bc.jpg');
-        background-size: 100% 100%;
-        height: 120vh;
-        height: auto;
-        min-height: 60svh;
-        padding-bottom: 50px;
-        background-size: cover;
-    }
-
     .Beea {
         top: 45%;
         right: 75%;
@@ -1710,13 +1782,73 @@ body.loading-locked {
 
     /* Hero */
     .fundo1 {
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%, rgb(0, 0, 0) 100%), url('https://i.pinimg.com/736x/b1/f8/5a/b1f85abab7f739bd3859a659ec2ce5bc.jpg');
-        background-size: 100% 100%;
-        height: 120vh;
-        height: auto;
+        background-image: radial-gradient(circle, #fecc4284 1.8px, transparent 1.8px)
+        background-size: 20px 20px, cover, cover;
+        background-position: left top, center, center;
+        background-repeat: repeat, no-repeat, no-repeat;
         min-height: 100svh;
-        padding-bottom: 50px;
-        background-size: cover;
+        padding: 5.5rem 1.25rem 3rem;
+    }
+
+    .inicio {
+        flex-direction: column;
+        gap: 1.25rem;
+        text-align: center;
+    }
+
+    .hexcode {
+        width: clamp(220px, 62vw, 360px);
+        max-width: 100%;
+        flex: 0 1 auto;
+    }
+
+    .inicio2frases {
+        flex: 0 1 auto;
+        width: min(100%, 36rem);
+        justify-items: center;
+        gap: 0.25rem;
+    }
+
+    .blob1 {
+        top: -30px;
+        right: -36px;
+        width: clamp(140px, 34vw, 240px);
+    }
+
+    .blob2 {
+        bottom: -70px;
+        right: -36px;
+        width: clamp(150px, 38vw, 260px);
+    }
+
+
+    .frase {
+        font-size: 1.25rem;
+        padding: 0;
+    }
+
+    .frase2 {
+        margin-left: 0;
+        width: 100%;
+        font-size: 1rem;
+    }
+
+    .inicio2frases > br {
+        display: none;
+    }
+
+    .inicio2frases .botao-animado {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .buttonenter,
+    .buttonenterS {
+        font-size: 1rem;
+        padding: 10px 16px;
+        margin-right: 0;
     }
 
     .logo {
@@ -1728,10 +1860,6 @@ body.loading-locked {
         padding-top: 50%;
     }
 
-    .empresa,
-    .empresa2 {
-        font-size: 220%;
-    }
 
     .frase {
         font-size: 120%;
@@ -1967,6 +2095,10 @@ body.loading-locked {
         font-size: 115%;
     }
 
+    .empresa{
+        font-size: 200%;
+    }
+
     .logo {
         padding-top: 35%;
         width: 40%;
@@ -1976,10 +2108,6 @@ body.loading-locked {
         padding-top: 65%;
     }
 
-    .empresa,
-    .empresa2 {
-        font-size: 180%;
-    }
 
     .frase {
         font-size: 105%;
