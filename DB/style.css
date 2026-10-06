@@ -162,7 +162,7 @@ body {
 }
 
 .wow {
-    background-color: #fecd42;
+    background-color: #fecc42a6;
     padding: 0.2%;
     color: #190b28;
     border-radius: 10px;
@@ -378,9 +378,9 @@ body {
 }
 
 .hexcode {
-    width: min(46vw, 580px);
+    width: min(46vw, 480px);
     height: auto;
-    flex: 0 1 580px;
+    flex: 0 1 480px;
     object-fit: contain;
 }
 
@@ -456,6 +456,24 @@ body {
     font-size: 300%;
     margin-top: 1%;
     text-align: center;
+}
+
+.divissor2 {
+    display: flex;
+    justify-self: center;
+    width: 10%;
+    border-radius: 10px;
+    height: 3px;
+    background-color: #e59817;
+}
+
+.divissorS2 {
+    display: flex;
+    justify-self: center;
+    width: 10%;
+    border-radius: 10px;
+    height: 3px;
+    background-color: #145944;
 }
 
 .tituloW {
@@ -716,13 +734,22 @@ body {
     position: relative;
     overflow: hidden;
     padding-top: 1%;
-    background-color: #000000;
+    position: relative;
+    overflow: hidden;
+    padding-top: 1%;
+        background-image: radial-gradient(circle, #f9f9f81f 1.8px, transparent 1.8px),
+            linear-gradient(to bottom, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 50%, rgba(0, 0, 0, 0.725) 100%);
+        background-size: 20px 20px, cover, cover;
+        background-position: left top, center, center;
+        background-repeat: repeat, no-repeat, no-repeat;
+    padding-bottom: 3%;
     padding-bottom: 3%;
 }
 
 .containernovo {
     padding-top: 1%;
     background-color: #f0f6f6;
+    margin-bottom: 10%;
 }
 
 .container2 {
@@ -882,15 +909,15 @@ body {
 
 #contato {
     color: #e59817;
-    font-size: 140%;
+    font-size: 100%;
     transition: 0.3s ease-in-out;
 }
 
 .contato2 {
     margin-top: 10%;
     display: flex;
-    width: 150px;
-    height: 40px;
+    width: 110px;
+    height: 30px;
     justify-content: center;
     background-color: #ffffff23;
     border: 2px solid #e59817;
@@ -936,6 +963,15 @@ body {
     transition: 0.2s ease-in-out;
 }
 
+.iconC4::before {
+    display: inline-block;
+    transition: transform 0.2s ease-in-out;
+}
+
+.container4:hover .iconC4::before {
+    transform: rotate(7deg);
+}
+
 .container4:hover {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.31);
     border: 2px solid #fecd42;
@@ -957,8 +993,21 @@ body {
 }
 
 .info4 {
+    display: grid;
+}
+
+.info4Y {
+    align-items: center;
+    gap: 4%;
     display: flex;
-    flex-direction: column;
+}
+
+.youwell{
+    width: 250px;
+}
+
+.textsY{
+    display: grid;
 }
 
 .nome4 {
@@ -1085,41 +1134,11 @@ body {
     align-items: center;
     padding: 1%;
     border-radius: 10px;
+    gap: 5%;
     transition: 0.2s ease-in-out;
 }
-
-#iconey {
-    filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.127));
-    position: relative;
-    width: 40%;
-    aspect-ratio: 1;
-    overflow: hidden;
-    margin-bottom: 5%;
-    background-image: url('img/sem\ título2.webp');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    cursor: pointer;
-}
-
-#iconey::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url('img/sem\ título.webp');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-}
-
-#iconey:hover::after {
-    opacity: 1;
-}
-
 .nome5 {
-    color: #1e9672;
+    color: #145944;
     font-size: 300%;
     font-weight: bold;
 }
@@ -1445,92 +1464,6 @@ body.loading-locked {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
-}
-
-.img-BeeaInterac {
-    position: relative;
-}
-
-.revelar-img {
-    width: 70%;
-    max-height: 50vh;
-    object-fit: cover;
-    margin-bottom: 20px;
-    border-radius: 8px;
-}
-
-.Beea-3D {
-    position: absolute;
-    bottom: 0;
-    right: 20%;
-    width: 280px;
-    height: 300px;
-}
-
-.Beea-3D2 {
-    position: absolute;
-    bottom: 0;
-    right: 20%;
-    width: 280px;
-    height: 300px;
-}
-
-/* Container que agrupa os indicadores e a linha */
-.indicators-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 20px;
-}
-
-/* Linha de fundo cinza (apagada) */
-.progress-line-bg {
-    position: absolute;
-    left: 0;
-    /* Alinha à esquerda dos números, ajuste se preferir à direita */
-    top: 10px;
-    bottom: 10px;
-    width: 4px;
-    background-color: #444;
-    border-radius: 2px;
-}
-
-/* Linha ativa que vai crescer com o scroll */
-.progress-line-fill {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #ffcd42;
-    /* Cor ativa igual à do número */
-    transform-origin: top;
-    transform: scaleY(0);
-    /* Começa zerada */
-    border-radius: 2px;
-}
-
-.indicators {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    /* Aumentado um pouco para dar mais espaço à linha */
-    position: relative;
-    z-index: 2;
-    padding-left: 20px;
-    /* Afasta o número da linha */
-}
-
-.indicator {
-    font-size: 2rem;
-    color: #444;
-    font-weight: bold;
-    transition: color 0.3s;
-}
-
-.indicator.active {
-    color: #ffcd42;
 }
 
 
