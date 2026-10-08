@@ -31,6 +31,20 @@ body {
     touch-action: pan-y;
 }
 
+#team-page[hidden] {
+    display: none;
+}
+
+.team-page-view {
+    box-sizing: border-box;
+    min-height: 100vh;
+    padding: 100px 4% 40px;
+}
+
+.team-back-link {
+    text-decoration: none;
+}
+
 .responsivo {
     flex-wrap: wrap;
 }
@@ -749,7 +763,6 @@ body {
 .containernovo {
     padding-top: 1%;
     background-color: #f0f6f6;
-    margin-bottom: 10%;
 }
 
 .container2 {
@@ -812,47 +825,75 @@ body {
 }
 
 /* outro container denovo */
-.container3 {
+.container3{
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    height: auto;
-    width: 16%;
-    color: rgb(0, 0, 0);
-    border-radius: 20px;
-    padding-bottom: 3%;
-    padding-top: 2%;
-    margin-bottom: 5%;
-    background-color: #ffffff;
-    border: 2px solid #7e828775;
-    transition: 0.3s ease-in-out;
-    border-top: 10px solid #fecc43;
+    flex-direction: row;
+    margin-top: 5%;
 }
 
-.container3:hover {
-    border: 2px solid #fecc43;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.31);
+#team-page .container3 {
+    box-sizing: border-box;
+    width: min(100%, 800px);
+    gap: clamp(16px, 3vw, 28px);
 }
 
 #perf3 {
     display: flex;
-    justify-content: center;
     justify-self: center;
-    align-items: center;
-    text-align: center;
-    width: 60%;
     aspect-ratio: 1;
-    object-fit: cover;
-    box-sizing: border-box;
     transition: 0.3s ease-in-out;
-    border-radius: 100%;
+    border-radius: 20px;
 }
 
 .foto-wrapper {
     position: relative;
-    display: inline-block;
-    /* Faz a caixinha ter o tamanho exato da foto */
+    display: inline-block;;
+}
+
+#team-page .foto-wrapper {
+    flex: 0 0 36%;
+}
+
+#team-page #perf3 {
+    width: 420px;
+    height: 500px;
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+
+.team-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.team-info .nome3 {
+    margin-top: 25%;
+    display: block;
+    text-align: left;
+    font-size: 40px;
+}
+
+.team-info .divissorP {
+    width: 70%;
+    margin-top: 1px;
+    margin-bottom: 10%;
+}
+
+.team-info .desc3 {
+    margin-top: 8px;
+}
+
+.team-info .contato2 {
+    margin: 0;
+}
+
+.team-info .contatoo {
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.team-info .contato {
+    flex: 0 0 auto;
 }
 
 
@@ -861,19 +902,19 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 40px;
+    width: 60px;
     aspect-ratio: 1;
     border-radius: 50%;
-    font-size: 170%;
-    background-color: #e59817;
+    font-size: 200%;
+    background-color: #190b28;
     color: white;
     z-index: 100;
 
     /* Posicionamento absoluto baseado na FOTO */
     position: absolute;
-    bottom: -15px;
+    top: 10px;
     /* Se quiser ele MAIS para baixo, aumente para -20px. Se quiser MAIS para cima, diminua para -5px ou 0 */
-    left: 50%;
+    left: 10%;
     transform: translateX(-50%);
 }
 
@@ -894,47 +935,54 @@ body {
 }
 
 .nome3 {
-    text-align: center;
     font-size: 140%;
-    margin-top: 10%;
     font-weight: bold;
     letter-spacing: 1px;
 }
 
 .desc3 {
-    color: #000000a3;
+    background-color: #fecc423b;
+    border-radius: 100px;
     margin-top: 8%;
+    text-align: center;
+    color: #f7b90e;
+    font-size: 17px;
+    width: 240px;
+}
+
+.moreabout{
+    font-size: 17px;
+    width: 400px;
+    color: #000000a3;
+    font-weight: 400;
+    word-spacing: 2px;
+}
+
+.contatoo{
+    margin-top: 20%;
+    gap: 5%;
+    display: flex;
+    align-items: center;
     text-align: center;
 }
 
-#contato {
+.contato {
+    font-size: 40px;
     color: #e59817;
-    font-size: 100%;
     transition: 0.3s ease-in-out;
 }
 
 .contato2 {
     margin-top: 10%;
     display: flex;
-    width: 110px;
     height: 30px;
     justify-content: center;
-    background-color: #ffffff23;
-    border: 2px solid #e59817;
+    color: #000000;
     border-radius: 10px;
     align-items: center;
     font-size: 110%;
     text-align: center;
     transition: 0.3s ease-in-out;
-}
-
-.contato2:hover #contato {
-    color: #fecd42;
-}
-
-.contato2:hover {
-    border: 2px solid #e59817;
-    background-color: #e59817;
 }
 
 /* texto centro  */
@@ -1191,8 +1239,7 @@ footer {
 }
 
 .divissorP {
-    width: 10%;
-    margin-top: 4%;
+    width: 80%;
     border-radius: 10px;
     height: 3px;
     background-color: #e59817;
@@ -1499,7 +1546,7 @@ body.loading-locked {
     /* Hero */
     .fundo1 {
         background-image: radial-gradient(circle, #fecc4284 1.8px, transparent 1.8px),
-            linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%, rgb(0, 0, 0) 100%)
+            linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0) 100%);
         background-size: 20px 20px, cover, cover;
         background-position: left top, center, center;
         background-repeat: repeat, no-repeat, no-repeat;
@@ -1715,7 +1762,7 @@ body.loading-locked {
 
     /* Hero */
     .fundo1 {
-        background-image: radial-gradient(circle, #fecc4284 1.8px, transparent 1.8px)
+        background-image: radial-gradient(circle, #fecc4284 1.8px, transparent 1.8px);
         background-size: 20px 20px, cover, cover;
         background-position: left top, center, center;
         background-repeat: repeat, no-repeat, no-repeat;

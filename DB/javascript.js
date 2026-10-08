@@ -273,18 +273,62 @@ function initLateralPinSection() {
 // ==========================================
 // 4. LINKS ÂNCORA COM ROLAGEM SUAVE
 // ==========================================
+function showPage(page, target) {
+    const homePage = document.getElementById('home-page');
+    const teamPage = document.getElementById('team-page');
+    const isTeamPage = page === 'team';
+
+    homePage.hidden = isTeamPage;
+    teamPage.hidden = !isTeamPage;
+    document.getElementById('header').style.top = '0px';
+    lenis.scrollTo(0, { immediate: true });
+
+    if (!isTeamPage) {
+        requestAnimationFrame(() => {
+            if (target && document.getElementById(target.slice(1))) {
+                lenis.scrollTo(target, {
+                    duration: 1.5,
+                    offset: -50,
+                    immediate: false,
+                    lock: true
+                });
+            }
+            ScrollTrigger.refresh();
+        });
+    }
+}
+
+function navigateToHash(hash, updateHistory = true) {
+    if (updateHistory && window.location.hash !== hash) {
+        window.history.pushState(null, '', hash);
+    }
+
+    if (hash === '#equipe') {
+        showPage('team');
+        return;
+    }
+
+    showPage('home', hash === '#inicio' || hash === '#' ? null : hash);
+}
+
+function syncPageWithLocation() {
+    navigateToHash(window.location.hash || '#inicio', false);
+}
+
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = this.getAttribute('href');
-        lenis.scrollTo(target, {
-            duration: 1.5,
-            offset: -50,
-            immediate: false,
-            lock: true
-        });
+        navigateToHash(target);
     });
 });
+
+window.addEventListener('popstate', syncPageWithLocation);
+window.addEventListener('hashchange', syncPageWithLocation);
+if (window.location.hash === '#equipe') {
+    showPage('team');
+}
+
 document.querySelectorAll('.buttonenter').forEach(button => {
     button.addEventListener('pointermove', event => {
         const rect = button.getBoundingClientRect();
