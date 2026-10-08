@@ -609,7 +609,7 @@ body {
 
 /* containers */
 .searruma {
-    display: flex;
+    display: grid;
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -952,7 +952,7 @@ body {
 
 .moreabout{
     font-size: 17px;
-    width: 400px;
+    width: 370px;
     color: #000000a3;
     font-weight: 400;
     word-spacing: 2px;
