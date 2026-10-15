@@ -21,6 +21,11 @@
         </div>
         <div class="loading-text">Carregando</div>
     </div>
+    <div id="transition-overlay" class="transition-overlay" aria-hidden="true">
+        <div id="transition-layer-3" class="transition-layer transition-layer-3"></div>
+        <div id="transition-layer-2" class="transition-layer transition-layer-2"></div>
+        <div id="transition-layer-1" class="transition-layer transition-layer-1"></div>
+    </div>
 
     <header id="header">
         <img src="img/DataBeeIcon.webp" class="logoheader">
@@ -70,10 +75,7 @@
         <h1 class="frases">A DataBee é uma empresa especializada em desenvolvimento de sistemas personalizados para
             atender
             cada demanda.</h1>
-
-        <br><br>
-
-        <div class="searruma">
+        <div class="searruma2">
             <div class="container botao-animado">
                 <i class="bi bi-braces" id="icon"></i>
                 <div id="perfsoft"></div>
@@ -105,7 +107,7 @@
             <h1 class="titulo">Nossos serviços</h1>
             <div class="divissor2"></div>
             <h1 class="frases">Vamos cuidar bem da sua ideia e transforma-la em seu site para sua corporação</h1>
-            <div class="searruma">
+            <div class="searruma2">
                 <div class="container4 botao-animado">
                     <i class="bi bi-arrow-clockwise iconC4" id="perf4"></i>
                     <div class="info4">
@@ -121,7 +123,7 @@
                     </div>
                 </div>
             </div>
-            <div class="searruma">
+            <div class="searruma2">
                 <div class="container4 botao-animado">
                     <i class="bi bi-briefcase iconC4" id="perf4"></i>
                     <div class="info4">
@@ -254,6 +256,7 @@
         <a href="#inicio" class="buttonenterS team-back-link">
             <i class="bi bi-arrow-left"></i> Voltar ao início
         </a>
+        <div class="doodle-dots-light"></div>
         <h1 class="more" id="equipee">Nossa equipe</h1>
         <div class="textocentro">
             <span class="numero">5</span><span class="titulo" id="passo">Mentes por trás dessa empresa</span>
@@ -287,7 +290,8 @@
                     <span class="nome3">Yago</span>
                     <div class="divissorP"></div>
                     <h4 class="desc3">Back-end & Scrum Master</h4>
-                    <h1 class="moreabout">Formulou o Back-end da YouWell conectado</h1>
+                    <h1 class="moreabout">Formulou o Back-end da YouWell conectando ao banco de dados fazendo uma
+                        conexão estável e garantida com segurança de ponta</h1>
                     <a href="https://github.com/Yagopavan" target="_blank" rel="noopener noreferrer">
                         <div class="contatoo">
                             <i class="bi bi-github contato"></i>
@@ -301,55 +305,70 @@
                     <i class="bi bi-file-earmark-code" id="icon2"></i>
                 </div>
             </div>
-        </div>
-        <!--             <div class="container3 botao-animado">
-                <div class="foto-wrapper">
-                    <img src="" id="perf3">
-                    <i class="" id="icon2"></i>
-                </div>
-                <span class="nome3">Yago</span>
-                <div class="divissorP"></div>
-                <h4 class="desc3">Back-End | Scrum Master</h4>
-                <a href="" target="_blank" rel="noopener noreferrer">
-                    <h1 class="contato2"><i class="bi bi-github" id="contato">GitHub</i></h1>
-                </a>
-            </div>
-            <div class="container3 botao-animado">
+
+            <div class="container3">
                 <div class="foto-wrapper">
                     <img src="https://databee.netlify.app/img/image%20(2).png" id="perf3">
-                    <i class="bi bi-person-square" id="icon2"></i>
+                    <i class="bi bi-person-circle" id="icon2"></i>
                 </div>
-                <span class="nome3">Gabriela</span>
-                <div class="divissorP"></div>
-                <h4 class="desc3">Production Owner | FullStack</h4>
-                <a href="https://github.com/Gabriela-Moura" target="_blank" rel="noopener noreferrer">
-                    <h1 class="contato2"><i class="bi bi-github" id="contato">GitHub</i></h1>
-                </a>
+                <div class="team-info">
+                    <span class="nome3">Gabriela</span>
+                    <div class="divissorP"></div>
+                    <h4 class="desc3">Product Owner & FullStack</h4>
+                    <h1 class="moreabout">Coordena cada etapa da DataBee em que ações devem ser feitas e o por que devem
+                        ser feitas. Atua também em partes do back-end e front-end, até no aplicativo da YouWell</h1>
+                    <a href="https://github.com/Gabriela-Moura" target="_blank" rel="noopener noreferrer">
+                        <div class="contatoo">
+                            <i class="bi bi-github contato"></i>
+                            <h1 class="contato2">Visualizar perfil no GitHub</h1>
+                        </div>
+                    </a>
+                </div>
             </div>
-            <div class="container3 botao-animado">
+
+            <div class="container3">
+
+                <div class="team-info">
+                    <span class="nome3">Amanda</span>
+                    <div class="divissorP"></div>
+                    <h4 class="desc3">Documentação & Testes</h4>
+                    <h1 class="moreabout">Estrutura documentos importantes de cada etapa do aplicativo e site, cada
+                        andamento e estrutura do site, organizando de forma eficiente o nosso progresso.</h1>
+                    <a href="https://github.com/Amandamonteleone" target="_blank" rel="noopener noreferrer">
+                        <div class="contatoo">
+                            <i class="bi bi-github contato"></i>
+                            <h1 class="contato2">Visualizar perfil no GitHub</h1>
+                        </div>
+                    </a>
+                </div>
                 <div class="foto-wrapper">
                     <img src="https://databee.netlify.app/img/Captura%20de%20tela%202026-03-19%20152849.png" id="perf3">
-                    <i class="bi bi-file-earmark-bar-graph" id="icon2"></i>
+                    <i class="bi bi-archive-fill" id="icon2"></i>
                 </div>
-                <span class="nome3">Amanda</span>
-                <div class="divissorP"></div>
-                <h4 class="desc3">Documentação e testes</h4>
-                <a href="https://github.com/Amandamonteleone" target="_blank" rel="noopener noreferrer">
-                    <h1 class="contato2"><i class="bi bi-github" id="contato">GitHub</i></h1>
-                </a>
             </div>
-            <div class="container3 botao-animado">
+
+            <div class="container3">
                 <div class="foto-wrapper">
                     <img src="https://databee.netlify.app/img/Captura%20de%20tela%202026-03-19%20154006.png" id="perf3">
-                    <i class="bi bi-box" id="icon2"></i>
+                    <i class="bi bi-database" id="icon2"></i>
                 </div>
-                <span class="nome3">Diego</span>
-                <div class="divissorP"></div>
-                <h4 class="desc3">Analista e criador de Banco de dados</h4>
-                <a href="https://github.com/Diegotv39" target="_blank" rel="noopener noreferrer">
-                    <h1 class="contato2"><i class="bi bi-github" id="contato">GitHub</i></h1>
-                </a>
-            </div> -->
+                <div class="team-info">
+                    <span class="nome3">Diego</span>
+                    <div class="divissorP"></div>
+                    <h4 class="desc3">Banco de dados & Modelador</h4>
+                    <h1 class="moreabout">Atua na formação do banco de dados para armazenar senhas, nome e setores de
+                        forma segura e criptografada, atua também na modelagem 3D para apresentação do nosso serviço.
+                    </h1>
+                    <a href="https://github.com/Diegotv39" target="_blank" rel="noopener noreferrer">
+                        <div class="contatoo">
+                            <i class="bi bi-github contato"></i>
+                            <h1 class="contato2">Visualizar perfil no GitHub</h1>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </div>
         </div>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>

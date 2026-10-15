@@ -27,7 +27,7 @@ html {
 
 body {
     font-family: 'Montserrat', sans-serif;
-    overflow-x: hidden;
+    overflow-x: clip;
     touch-action: pan-y;
 }
 
@@ -35,14 +35,170 @@ body {
     display: none;
 }
 
+@keyframes wipeDiagonal {
+    from {
+        transform: translate(-50%, -50%) translate(-120vw, -120vh) rotate(-45deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) translate(140vw, 200vh) rotate(-45deg);
+    }
+}
+
+.transition-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.transition-layer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400vw;
+    height: 400vh;
+    opacity: 0;
+    transform: translate(-50%, -50%) translate(-120vw, -120vh) rotate(-45deg);
+}
+
+.transition-layer-1 {
+    background-color: #190b28;
+}
+
+.transition-layer-2 {
+    background-color: #e59817;
+    margin-left: -175px;
+}
+
+.transition-layer-3 {
+    background-color: #fecd42;
+    margin-left: -350px;
+}
+
+.transition-overlay.is-active .transition-layer-1,
+.transition-overlay.is-active .transition-layer-2,
+.transition-overlay.is-active .transition-layer-3 {
+    opacity: 1;
+    animation: wipeDiagonal 1.2s cubic-bezier(1, 0, 0.175, 1) forwards;
+}
+
+.transition-overlay.is-active .transition-layer-2 {
+    animation-delay: 0.1s;
+}
+
+.transition-overlay.is-active .transition-layer-3 {
+    animation-delay: 0.2s;
+}
+
+.transition-overlay.mobile-transition .transition-layer {
+    width: 300vw;
+    height: 600vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) translate(-120vw, 0) rotate(-45deg);
+}
+
+.transition-overlay.mobile-transition .transition-layer-2,
+.transition-overlay.mobile-transition .transition-layer-3 {
+    margin-left: 0;
+}
+
+.transition-overlay.mobile-transition.is-active .transition-layer-1,
+.transition-overlay.mobile-transition.is-active .transition-layer-2,
+.transition-overlay.mobile-transition.is-active .transition-layer-3 {
+    animation-name: wipeMobile;
+    animation-duration: 0.85s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.transition-overlay.mobile-transition.is-active .transition-layer-2 {
+    animation-delay: 0.08s;
+}
+
+.transition-overlay.mobile-transition.is-active .transition-layer-3 {
+    animation-delay: 0.16s;
+}
+
+@keyframes wipeMobile {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) translate(-120vw, 0) rotate(-45deg);
+    }
+
+    15% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) translate(370vw, 0) rotate(-45deg);
+    }
+}
+
 .team-page-view {
     box-sizing: border-box;
     min-height: 100vh;
     padding: 100px 4% 40px;
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.team-page-view.is-visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .team-back-link {
     text-decoration: none;
+}
+
+@media (max-width: 768px) {
+    .team-page-view {
+        padding-top: 76px;
+        padding-left: 5%;
+        padding-right: 5%;
+        transform: translateY(12px);
+        transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+
+    .team-page-view.is-visible {
+        transform: translateY(0);
+    }
+
+    .transition-layer {
+        width: 160vw;
+        height: 34vh;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) translate(-120vw, 0) rotate(-14deg);
+    }
+
+    .transition-layer-2 {
+        margin-left: 0;
+    }
+
+    .transition-layer-3 {
+        margin-left: 0;
+    }
+
+    .transition-overlay.is-active .transition-layer-1,
+    .transition-overlay.is-active .transition-layer-2,
+    .transition-overlay.is-active .transition-layer-3 {
+        animation-name: wipeMobile;
+        animation-duration: 0.85s;
+        animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .transition-overlay.is-active .transition-layer-2 {
+        animation-delay: 0.08s;
+    }
+
+    .transition-overlay.is-active .transition-layer-3 {
+        animation-delay: 0.16s;
+    }
 }
 
 .responsivo {
@@ -617,6 +773,15 @@ body {
     width: 100%;
 }
 
+.searruma2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2%;
+    width: 100%;
+}
+
 .container {
     border: 2px solid #7e828775;
     display: flex;
@@ -751,11 +916,11 @@ body {
     position: relative;
     overflow: hidden;
     padding-top: 1%;
-        background-image: radial-gradient(circle, #f9f9f81f 1.8px, transparent 1.8px),
-            linear-gradient(to bottom, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 50%, rgba(0, 0, 0, 0.725) 100%);
-        background-size: 20px 20px, cover, cover;
-        background-position: left top, center, center;
-        background-repeat: repeat, no-repeat, no-repeat;
+    background-image: radial-gradient(circle, #f9f9f81f 1.8px, transparent 1.8px),
+        linear-gradient(to bottom, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 50%, rgba(0, 0, 0, 0.725) 100%);
+    background-size: 20px 20px, cover, cover;
+    background-position: left top, center, center;
+    background-repeat: repeat, no-repeat, no-repeat;
     padding-bottom: 3%;
     padding-bottom: 3%;
 }
@@ -825,7 +990,7 @@ body {
 }
 
 /* outro container denovo */
-.container3{
+.container3 {
     display: flex;
     flex-direction: row;
     margin-top: 5%;
@@ -833,12 +998,19 @@ body {
 
 #team-page .container3 {
     box-sizing: border-box;
-    width: min(100%, 800px);
-    gap: clamp(16px, 3vw, 28px);
+    width: min(100%, 860px);
+    margin: clamp(24px, 4vw, 48px) auto 0;
+    gap: clamp(30px, 6vw, 70px);
+    display: flex;
+    align-items: center;
+}
+
+.line{
+    
 }
 
 #perf3 {
-    display: flex;
+    display: block;
     justify-self: center;
     aspect-ratio: 1;
     transition: 0.3s ease-in-out;
@@ -847,36 +1019,40 @@ body {
 
 .foto-wrapper {
     position: relative;
-    display: inline-block;;
+    display: inline-block;
 }
 
 #team-page .foto-wrapper {
-    flex: 0 0 36%;
+    flex: 0 0 min(36%, 300px);
+    max-width: 300px;
 }
 
 #team-page #perf3 {
-    width: 420px;
-    height: 500px;
-    aspect-ratio: 1;
+    width: 430px;
+    height: 450px;
     object-fit: cover;
+    display: block;
 }
 
 .team-info {
     flex: 1;
     min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .team-info .nome3 {
-    margin-top: 25%;
+    margin-top: 0;
     display: block;
     text-align: left;
-    font-size: 40px;
+    font-size: clamp(2rem, 3vw, 2.5rem);
 }
 
 .team-info .divissorP {
-    width: 70%;
+    width: min(100%, 70%);
     margin-top: 1px;
-    margin-bottom: 10%;
+    margin-bottom: clamp(16px, 2vw, 32px);
 }
 
 .team-info .desc3 {
@@ -890,6 +1066,10 @@ body {
 .team-info .contatoo {
     gap: 8px;
     margin-top: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
 }
 
 .team-info .contato {
@@ -914,7 +1094,7 @@ body {
     position: absolute;
     top: 10px;
     /* Se quiser ele MAIS para baixo, aumente para -20px. Se quiser MAIS para cima, diminua para -5px ou 0 */
-    left: 10%;
+    left: -10%;
     transform: translateX(-50%);
 }
 
@@ -946,11 +1126,13 @@ body {
     margin-top: 8%;
     text-align: center;
     color: #f7b90e;
-    font-size: 17px;
-    width: 240px;
+    font-size: 100%;
+    width: 270px;
+    padding: 1%;
+    margin-bottom: 6%;
 }
 
-.moreabout{
+.moreabout {
     font-size: 17px;
     width: 370px;
     color: #000000a3;
@@ -958,7 +1140,7 @@ body {
     word-spacing: 2px;
 }
 
-.contatoo{
+.contatoo {
     margin-top: 20%;
     gap: 5%;
     display: flex;
@@ -1050,11 +1232,11 @@ body {
     display: flex;
 }
 
-.youwell{
+.youwell {
     width: 250px;
 }
 
-.textsY{
+.textsY {
     display: grid;
 }
 
@@ -1185,6 +1367,7 @@ body {
     gap: 5%;
     transition: 0.2s ease-in-out;
 }
+
 .nome5 {
     color: #145944;
     font-size: 300%;
@@ -1608,7 +1791,7 @@ body.loading-locked {
     }
 
     /* Cards .container (seção de serviços/produtos) */
-    .searruma {
+    .searruma2 {
         flex-wrap: wrap;
         gap: 2%;
         padding: 0 2%;
@@ -1690,7 +1873,9 @@ body.loading-locked {
     }
 
     #icon2 {
-        margin-top: 190px;
+        font-size: 120%;
+        width: 40px;
+        left: 20%;
     }
 
     #icon {
@@ -1728,7 +1913,29 @@ body.loading-locked {
     }
 }
 
+@media (max-width: 900px) {
+    #team-page {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
 
+    #team-page .container3 {
+        width: min(100%, 680px);
+        gap: 24px;
+    }
+
+    #team-page .foto-wrapper {
+        flex-basis: 280px;
+    }
+
+    .team-info {
+        align-items: flex-start;
+    }
+
+    .moreabout {
+        width: min(100%, 440px);
+    }
+}
 
 /* --- MOBILE (max-width: 768px) --- */
 @media (max-width: 768px) {
@@ -1813,7 +2020,7 @@ body.loading-locked {
         font-size: 1rem;
     }
 
-    .inicio2frases > br {
+    .inicio2frases>br {
         display: none;
     }
 
@@ -1869,6 +2076,52 @@ body.loading-locked {
     .centraa {
         flex-direction: column;
         align-items: center;
+    }
+
+    #team-page {
+        padding-top: 72px;
+    }
+
+    #team-page .container3 {
+        flex-direction: column;
+        width: min(100%, 520px);
+        text-align: center;
+    }
+
+    #team-page .foto-wrapper {
+        width: min(100%, 280px);
+        max-width: 280px;
+        flex-basis: auto;
+    }
+
+    #team-page #perf3 {
+        width: 100%;
+        max-width: 280px;
+        height: auto;
+    }
+
+    .team-info {
+        width: 100%;
+        align-items: center;
+        text-align: center;
+    }
+
+    .team-info .nome3 {
+        text-align: center;
+    }
+
+    .team-info .divissorP {
+        width: 90%;
+        margin-inline: auto;
+    }
+
+    .moreabout {
+        width: min(100%, 420px);
+        text-align: center;
+    }
+
+    .team-info .contatoo {
+        justify-content: center;
     }
 
     .descc {
@@ -2075,7 +2328,7 @@ body.loading-locked {
         font-size: 115%;
     }
 
-    .empresa{
+    .empresa {
         font-size: 200%;
     }
 
@@ -2096,6 +2349,14 @@ body.loading-locked {
     .titulo,
     .tituloW {
         font-size: 145%;
+    }
+
+    #team-page .container3 {
+        width: 100%;
+    }
+
+    #team-page #perf3 {
+        max-width: 220px;
     }
 
     .container,

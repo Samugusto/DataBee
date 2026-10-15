@@ -273,6 +273,19 @@ function initLateralPinSection() {
 // ==========================================
 // 4. LINKS ÂNCORA COM ROLAGEM SUAVE
 // ==========================================
+const transitionOverlay = document.getElementById('transition-overlay');
+let isPageTransitioning = false;
+let pendingPageChange = null;
+
+function updateTransitionMode() {
+    if (!transitionOverlay) return;
+    const isMobileTransition = window.matchMedia('(max-width: 768px)').matches;
+    transitionOverlay.classList.toggle('mobile-transition', isMobileTransition);
+}
+
+window.addEventListener('resize', updateTransitionMode);
+updateTransitionMode();
+
 function showPage(page, target) {
     const homePage = document.getElementById('home-page');
     const teamPage = document.getElementById('team-page');
@@ -280,11 +293,20 @@ function showPage(page, target) {
 
     homePage.hidden = isTeamPage;
     teamPage.hidden = !isTeamPage;
+
+    if (isTeamPage) {
+        teamPage.classList.remove('is-visible');
+    }
+
     document.getElementById('header').style.top = '0px';
     lenis.scrollTo(0, { immediate: true });
 
-    if (!isTeamPage) {
-        requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+        if (isTeamPage) {
+            teamPage.classList.add('is-visible');
+        }
+
+        if (!isTeamPage) {
             if (target && document.getElementById(target.slice(1))) {
                 lenis.scrollTo(target, {
                     duration: 1.5,
@@ -293,33 +315,70 @@ function showPage(page, target) {
                     lock: true
                 });
             }
-            ScrollTrigger.refresh();
-        });
-    }
+        }
+        ScrollTrigger.refresh();
+    });
 }
 
-function navigateToHash(hash, updateHistory = true) {
+function transitionToPage(page, target) {
+    const isTeamPage = page === 'team';
+    const teamPage = document.getElementById('team-page');
+    const isAlreadyOnTargetPage = teamPage.hidden === !isTeamPage;
+
+    if (isPageTransitioning) {
+        pendingPageChange = { page, target };
+        return;
+    }
+    if (isAlreadyOnTargetPage) {
+        showPage(page, target);
+        return;
+    }
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        showPage(page, target);
+        return;
+    }
+
+    isPageTransitioning = true;
+    pendingPageChange = { page, target };
+    transitionOverlay.classList.add('is-active');
+
+    window.setTimeout(() => {
+        showPage(pendingPageChange.page, pendingPageChange.target);
+    }, 600);
+
+    window.setTimeout(() => {
+        transitionOverlay.classList.remove('is-active');
+        isPageTransitioning = false;
+        pendingPageChange = null;
+    }, 1400);
+}
+
+function navigateToHash(hash, updateHistory = true, animatePageChange = false) {
+    if (isPageTransitioning && updateHistory) return;
+
     if (updateHistory && window.location.hash !== hash) {
         window.history.pushState(null, '', hash);
     }
 
+    const navigate = animatePageChange ? transitionToPage : showPage;
+
     if (hash === '#equipe') {
-        showPage('team');
+        navigate('team');
         return;
     }
 
-    showPage('home', hash === '#inicio' || hash === '#' ? null : hash);
+    navigate('home', hash === '#inicio' || hash === '#' ? null : hash);
 }
 
 function syncPageWithLocation() {
-    navigateToHash(window.location.hash || '#inicio', false);
+    navigateToHash(window.location.hash || '#inicio', false, true);
 }
 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = this.getAttribute('href');
-        navigateToHash(target);
+        navigateToHash(target, true, true);
     });
 });
 
