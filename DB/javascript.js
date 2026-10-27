@@ -401,3 +401,52 @@ document.querySelectorAll('.buttonenter').forEach(button => {
         button.style.transform = '';
     });
 });
+
+const beeRender = document.querySelector('.hexcode');
+const supportsMouseTilt = window.matchMedia('(hover: hover) and (prefers-reduced-motion: no-preference)');
+
+if (beeRender && supportsMouseTilt.matches) {
+    beeRender.addEventListener('pointermove', event => {
+        if (event.pointerType !== 'mouse') return;
+
+        const bounds = beeRender.getBoundingClientRect();
+        const pointerX = ((event.clientX - bounds.left) / bounds.width) * 2 - 1;
+        const pointerY = ((event.clientY - bounds.top) / bounds.height) * 2 - 1;
+
+        beeRender.style.setProperty('--tilt-x', `${-pointerY * 8}deg`);
+        beeRender.style.setProperty('--tilt-y', `${pointerX * 10}deg`);
+    });
+
+    beeRender.addEventListener('pointerleave', () => {
+        beeRender.style.removeProperty('--tilt-x');
+        beeRender.style.removeProperty('--tilt-y');
+    });
+}
+
+if (beeRender) {
+    beeRender.addEventListener('click', event => {
+        if (event.detail === 0 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        const sparkles = ['✦', '✧', '★', '✴'];
+
+        for (let index = 0; index < 8; index++) {
+            const angle = (Math.PI * 2 * index) / 8 + Math.random() * 0.4;
+            const distance = 24 + Math.random() * 42;
+            const particle = document.createElement('span');
+
+            particle.className = 'sparkle-particle';
+            particle.setAttribute('aria-hidden', 'true');
+            particle.textContent = sparkles[Math.floor(Math.random() * sparkles.length)];
+            particle.style.left = `${event.clientX}px`;
+            particle.style.top = `${event.clientY}px`;
+            particle.style.setProperty('--sparkle-x', `${Math.cos(angle) * distance}px`);
+            particle.style.setProperty('--sparkle-y', `${Math.sin(angle) * distance}px`);
+            particle.style.setProperty('--sparkle-size', `${12 + Math.random() * 12}px`);
+            particle.style.setProperty('--sparkle-duration', `${450 + Math.random() * 250}ms`);
+            particle.style.setProperty('--sparkle-rotation', `${Math.random() * 120 - 60}deg`);
+            particle.addEventListener('animationend', () => particle.remove(), { once: true });
+
+            document.body.append(particle);
+        }
+    });
+}

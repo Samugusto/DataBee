@@ -553,6 +553,41 @@ body {
     height: auto;
     flex: 0 1 480px;
     object-fit: contain;
+    cursor: pointer;
+}
+
+.sparkle-particle {
+    position: fixed;
+    z-index: 9999;
+    pointer-events: none;
+    color: #e59817;
+    font-size: var(--sparkle-size);
+    line-height: 1;
+    text-shadow: 0 0 8px #fecd42;
+    animation: sparkleBurst var(--sparkle-duration) ease-out forwards;
+}
+
+@keyframes sparkleBurst {
+    from {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.35) rotate(0deg);
+    }
+
+    to {
+        opacity: 0;
+        transform: translate(calc(-50% + var(--sparkle-x)), calc(-50% + var(--sparkle-y))) scale(1.2) rotate(var(--sparkle-rotation));
+    }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .hexcode.botao-animado-esquerda.ativo {
+        transform-origin: center;
+        transition: opacity 0.6s ease, transform 0.25s ease;
+    }
+
+    .hexcode.botao-animado-esquerda.ativo:hover {
+        transform: translateX(0) perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+    }
 }
 
 
@@ -1471,9 +1506,8 @@ a {
 }
 
 #iconny {
-    position: absolute;
-    color: #7e8287;
-    right: -25px;
+    color: #e59817;
+    margin-right: 5%;
 }
 
 .opt:hover {
